@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Container } from "@/components/ui/Container";
+import { Magnetic } from "@/components/fx/Magnetic";
 import { cn } from "@/lib/cn";
 
 const LINKS = [
@@ -33,12 +34,14 @@ export function Nav() {
       )}
     >
       <Container className="flex items-center justify-between py-4">
-        <a
-          href="#home"
-          className="font-display text-base font-extrabold uppercase tracking-tight text-sf-white"
-        >
-          Salt Frame<span className="text-sf-red">.</span>
-        </a>
+        <Magnetic strength={0.3}>
+          <a
+            href="#home"
+            className="font-display text-base font-extrabold uppercase tracking-tight text-sf-white"
+          >
+            Salt Frame<span className="text-sf-red">.</span>
+          </a>
+        </Magnetic>
 
         {/* Desktop */}
         <nav className="hidden items-center gap-8 md:flex">
@@ -46,9 +49,10 @@ export function Nav() {
             <a
               key={l.href}
               href={l.href}
-              className="text-[0.8rem] font-medium uppercase tracking-[0.12em] text-sf-white/80 transition-colors hover:text-sf-white"
+              className="group relative text-[0.8rem] font-medium uppercase tracking-[0.12em] text-sf-white/80 transition-colors hover:text-sf-white"
             >
               {l.label}
+              <span className="absolute -bottom-1 left-0 h-px w-full origin-right scale-x-0 bg-sf-red transition-transform duration-300 ease-sf group-hover:origin-left group-hover:scale-x-100" />
             </a>
           ))}
         </nav>

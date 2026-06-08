@@ -29,12 +29,24 @@ function Placeholder({ project }: { project: Project }) {
   );
 }
 
-export function ProjectCard({ project }: { project: Project }) {
+export function ProjectCard({
+  project,
+  index,
+  featured = false,
+}: {
+  project: Project;
+  index?: number;
+  featured?: boolean;
+}) {
   const TypeIcon = project.type === "video" ? Play : Camera;
 
   return (
     <motion.article
-      className="group relative aspect-[4/5] overflow-hidden rounded-[2px] bg-sf-black"
+      data-cursor-label="Ver"
+      className={cn(
+        "group relative overflow-hidden rounded-[2px] bg-sf-black",
+        featured ? "h-full" : "aspect-[4/5]"
+      )}
       whileHover={{ y: -4 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
     >
@@ -60,6 +72,13 @@ export function ProjectCard({ project }: { project: Project }) {
           {project.type === "video" ? "Video" : "Foto"}
         </span>
       </div>
+
+      {/* Número editorial */}
+      {index != null && (
+        <span className="absolute left-5 top-4 font-display text-sm font-bold tracking-widest text-sf-white/70">
+          {String(index).padStart(2, "0")}
+        </span>
+      )}
 
       {/* Info inferior */}
       <div className="absolute inset-x-0 bottom-0 p-5">

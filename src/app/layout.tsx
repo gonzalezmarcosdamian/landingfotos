@@ -1,6 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Montserrat, Poppins } from "next/font/google";
 import "./globals.css";
+import { SmoothScroll } from "@/components/fx/SmoothScroll";
+import { Grain } from "@/components/fx/Grain";
+import { Cursor } from "@/components/fx/Cursor";
+import { Intro } from "@/components/fx/Intro";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -65,7 +69,14 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es" className={`${montserrat.variable} ${poppins.variable}`}>
-      <body>{children}</body>
+      <body>
+        <SmoothScroll>
+          <Intro />
+          <Grain />
+          <Cursor />
+          {children}
+        </SmoothScroll>
+      </body>
     </html>
   );
 }

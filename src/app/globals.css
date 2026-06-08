@@ -82,3 +82,22 @@ h3,
   font-size: clamp(2.75rem, 8vw, 6rem);
   font-weight: 800;
 }
+
+/* Marquee (banda de texto en movimiento) */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Cursor personalizado: ocultar el nativo solo en dispositivos con puntero fino */
+@media (pointer: fine) {
+  .has-custom-cursor,
+  .has-custom-cursor a,
+  .has-custom-cursor button {
+    cursor: none;
+  }
+}
