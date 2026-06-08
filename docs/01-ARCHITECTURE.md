@@ -107,9 +107,10 @@ El contenido visual es el protagonista. La web es el marco (frame) que lo presen
 - Video hero: `<video>` con `poster`, `preload="none"` fuera de viewport, formatos `webm`/`mp4`,
   con fallback a imagen en mobile/conexiones lentas.
 
-### 3.6 Contenido: **archivos tipados (Fase 1) → CMS headless (Fase 3)**
+### 3.6 Contenido: **archivos tipados (Fase 1) → backoffice Payload (Fase 2–3)**
 - Empezamos con contenido en TypeScript/MDX tipado (rápido, versionado, cero costo).
-- Camino de escalabilidad: migrar a **Sanity / Contentful** cuando el cliente necesite editar solo.
+- Camino de escalabilidad: **backoffice con Payload CMS embebido en Next.js** para que el cliente
+  edite de forma autónoma. Ver diseño completo en [`03-BACKOFFICE.md`](./03-BACKOFFICE.md).
 
 ### 3.7 Hosting: **Vercel (Edge CDN)**
 - CI/CD por git, preview deployments, edge caching, dominio custom + SSL automático.
