@@ -1,0 +1,15 @@
+# Vercel sube todo salvo lo listado aquí. A diferencia de git, SÍ queremos
+# subir los videos web del hero (públicos) para que la landing los sirva.
+
+node_modules
+.next
+.git
+docs
+tests
+coverage
+playwright-report
+test-results
+
+# Originales pesados del dropzone: NO se despliegan (solo los optimizados de /public/hero)
+public/media/raw
+public/media/optimized

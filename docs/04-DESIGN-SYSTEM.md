@@ -159,7 +159,11 @@ Principio: **sutil siempre**. La animación guía, no distrae del contenido.
 ## 7. Especificación por sección
 
 ### 7.1 Hero (Home)
-- **Fondo:** video/imágenes en loop mostrando acción y estilo (deporte, surf). Velo `--sf-overlay` para legibilidad.
+- **Fondo:** video en loop mostrando **acción y estilo** (brief). Asset confirmado: surfista en aéreo con
+  spray (`hero/`), en dos formatos — `hero-loop-desktop` (16:9) y `hero-loop-mobile` (9:16) — con `poster`.
+- **Legibilidad:** el material es muy luminoso (cielo/spray) y el sujeto va al centro-derecha →
+  velo `--sf-overlay` con **gradiente** y texto anclado **abajo-izquierda** (zona más uniforme).
+- Autoplay muted + loop; `preload="none"`; fallback al poster en mobile/data-saver y con reduced-motion.
 - **Texto superpuesto (centrado o bottom-left):**
   - Display: **SALT FRAME VISUALS**
   - Lead: *Imágenes vibrantes. Videos que transmiten.*

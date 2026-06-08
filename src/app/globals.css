@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+/* ── Tokens de marca Salt Frame Visuals (fuente de verdad) ──────────────── */
+@theme {
+  --color-sf-black: #0a0a0a;
+  --color-sf-white: #ffffff;
+  --color-sf-red: #d91a2a;
+  --color-sf-red-hover: #b3141f;
+  --color-sf-gray-900: #171717;
+  --color-sf-gray-700: #404040;
+  --color-sf-gray-500: #737373;
+  --color-sf-gray-300: #d4d4d4;
+  --color-sf-gray-200: #e5e5e5;
+
+  --font-display: var(--font-montserrat), system-ui, sans-serif;
+  --font-body: var(--font-poppins), system-ui, sans-serif;
+
+  --ease-sf: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root {
+  --sf-overlay: rgba(10, 10, 10, 0.45);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-sf-white);
+  color: var(--color-sf-black);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Titulares en la familia display */
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+/* Foco visible accesible */
+:focus-visible {
+  outline: 2px solid var(--color-sf-red);
+  outline-offset: 3px;
+}
+
+/* Selección de texto en rojo de marca */
+::selection {
+  background: var(--color-sf-red);
+  color: var(--color-sf-white);
+}
+
+/* Respeta usuarios que prefieren menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Utilidad: texto fluido para titulares display */
+.text-display {
+  font-size: clamp(2.75rem, 8vw, 6rem);
+  font-weight: 800;
+}
