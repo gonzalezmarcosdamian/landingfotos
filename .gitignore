@@ -45,6 +45,15 @@ yarn-error.log*
 # Vercel
 .vercel
 
+# Media — originales pesados no se versionan (ver docs/05-MEDIA-GUIDE.md)
+/public/media/raw/**
+!/public/media/raw/**/
+!/public/media/raw/**/.gitkeep
+# Videos optimizados pesados: servir desde storage externo, no commitear
+/public/media/optimized/**/*.mp4
+/public/media/optimized/**/*.webm
+/public/media/optimized/**/*.mov
+
 # TypeScript
 *.tsbuildinfo
 

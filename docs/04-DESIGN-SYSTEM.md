@@ -6,8 +6,32 @@
 
 - **Estado:** Diseño (Fase 0 → guía de implementación Fase 1)
 - **Última actualización:** 2026-06-08
-- **Referencias:** brief del cliente + sitio actual `saltframevisuals.com` (portfolio de Caetano
-  Papirblat: minimalista, foto/video, base en Australia, tagline *"art isn't a result, but a journey"*).
+- **Referencias:** brief del cliente + **web de referencia [`facunruiz.com`](https://www.facunruiz.com)**
+  + sitio actual `saltframevisuals.com` (portfolio de Caetano Papirblat).
+
+---
+
+## 0. Referencia de diseño — `facunruiz.com`
+
+Web de referencia elegida por el cliente. Es el norte estético.
+
+**Qué tomamos (ADN a replicar):**
+- **Ultra-minimalismo *photography-first*:** la imagen ocupa la pantalla (full-bleed), UI casi invisible.
+- **Galería full-width** en secuencia vertical / carrusel; ritmo visual limpio, una pieza protagonista a la vez.
+- **Carga blur-up:** placeholder borroso de baja calidad → imagen nítida (coincide con nuestro `blurDataURL`).
+- **Fondo blanco, texto negro, paleta neutra.** Sin ruido visual.
+- **Navegación en MAYÚSCULAS:** `PORTFOLIO · ABOUT · CONTACT`, nav superior fijo + menú móvil (toggle).
+- **Header de identidad sobrio:** "nombre | rol + ubicación" (ej. *Photographer based in Barcelona*).
+- **Transiciones suaves** (fades), sin estridencias.
+
+**Cómo Salt Frame se diferencia (sumado al ADN):**
+- **Acento rojo `#D91A2A`** — facunruiz es 100% neutro; nuestro rojo quirúrgico da actitud de marca (CTAs, detalles).
+- **Wordmark grande y bold** ("SALT FRAME VISUALS") y taglines del brief — más voz tipográfica que facunruiz.
+- **Video en loop** (deporte/surf) en el hero — facunruiz es solo foto; el video es nuestra ventaja audiovisual.
+- **Secciones de marca** (Sobre mí, Servicios con CTA HABLEMOS) que un portfolio puro no tiene.
+
+> Regla de oro: cuando dudes, **resta**. La referencia gana por lo que omite. El rojo y el video son
+> las dos únicas licencias de "más" que nos permitimos, y se usan con moderación.
 
 ---
 
@@ -109,10 +133,12 @@ Principio: **sutil siempre**. La animación guía, no distrae del contenido.
 - Estados: hover (`--sf-red-hover`), focus (anillo visible para teclado), active (`scale 0.98`), disabled.
 - CTAs clave: **PORTFOLIO** (hero) y **HABLEMOS** (servicios) → `primary`.
 
-### 6.2 Navegación
-- Header minimalista, sticky con fondo translúcido al hacer scroll (blur).
-- Logo/wordmark a la izquierda; links (Photography, Video, Sobre mí, Contacto) a la derecha; Instagram visible.
-- Mobile: menú hamburguesa a pantalla completa.
+### 6.2 Navegación (estilo `facunruiz.com`)
+- Header minimalista, sticky, fondo translúcido con blur al hacer scroll.
+- Wordmark a la izquierda con identidad sobria: **SALT FRAME VISUALS** · *Audiovisual based in Australia*.
+- Links a la derecha en **MAYÚSCULAS**: `PORTFOLIO · ABOUT · CONTACT` (+ Instagram visible).
+- Mobile: toggle **MENU** → menú a pantalla completa.
+- Indicador "top of page" / scroll-to-top en páginas largas.
 
 ### 6.3 Tarjeta de proyecto
 - Imagen/poster a full bleed con relación de aspecto fija (evita CLS).
@@ -141,8 +167,11 @@ Principio: **sutil siempre**. La animación guía, no distrae del contenido.
 - **CTA:** botón `primary` grande → **PORTFOLIO**.
 - Indicador de scroll sutil. Hero a `100svh` (mobile-safe).
 
-### 7.2 Portfolio
-- Título de sección + grilla de proyectos destacados.
+### 7.2 Portfolio (estilo `facunruiz.com`)
+- **Protagonismo full-bleed:** piezas grandes a todo el ancho, ritmo limpio (la imagen domina, como la referencia).
+- Opción A (referencia pura): secuencia vertical full-width con blur-up entre piezas.
+- Opción B (más navegable): grilla 1→2→3 columnas con hover que revela título/categoría.
+  *Recomendado:* grilla en el home (escaneo rápido) + vista full-bleed al abrir cada proyecto.
 - (Opcional) filtro por categoría: deporte · surf · real estate · gastronomía · estudio.
 - **Proyectos del brief:**
   | Proyecto | Tipo | Categoría |
