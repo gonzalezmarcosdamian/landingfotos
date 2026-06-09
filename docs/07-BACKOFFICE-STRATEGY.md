@@ -4,8 +4,31 @@
 > del desarrollador? Evalúa reutilizar **lexcore** vs. un CMS dedicado, y propone un plan integral.
 > Reemplaza el enfoque preliminar de [`03-BACKOFFICE.md`](./03-BACKOFFICE.md) (que asumía Payload).
 
-- **Estado:** Decisión pendiente (esperando definición estratégica del owner)
+- **Estado:** ✅ DECIDIDO — "Solo Cae ahora, plataforma después" (Opción A → B)
 - **Última actualización:** 2026-06-09
+
+---
+
+## 0. DECISIÓN TOMADA (2026-06-09)
+
+**Rumbo elegido:** arrancar simple con **Payload CMS embebido** para que Cae cargue contenido ya,
+pero **diseñar desacoplado** para migrar a la **plataforma multi-tenant sobre lexcore** cuando haya
+clientes reales y pagantes. No se construye multi-tenant para un solo usuario (YAGNI).
+
+**Garantías de desacople para que la migración A → B sea indolora (decisiones desde el día 1):**
+1. **Storage en Cloudflare R2 desde el inicio** (no Vercel Blob) — mismo patrón que lexcore
+   (`services/storage.py`). Los medios y sus URLs sobreviven a la migración sin re-subir nada.
+2. **La landing lee contenido por una capa de abstracción** (`src/content/*` → `getProjects()`,
+   `getSiteSettings()`, etc.). Hoy esa capa llama a la **Local API de Payload**; mañana llama al
+   **API de la plataforma lexcore**. Los componentes no saben de dónde viene el dato.
+3. **Esquema espejo del futuro `TenantModel`:** las colecciones Payload (Project, Media, Service,
+   Lead, SiteSettings) se modelan con la **misma forma** que las entidades de la plataforma, con un
+   campo conceptual de marca/tenant (valor único hoy: `salt-frame`). Migrar = mapeo directo.
+4. **Pipeline de medios** (derivados AVIF/WebP + posters + blur) como concepto portable; a escala se
+   reemplaza por Mux/Cloudinary sin tocar el contrato de la landing.
+
+→ Se ejecuta el **Plan de la Opción A** (§5). Cuando el negocio pida plataforma, se ejecuta §6
+reutilizando R2 + el esquema espejo.
 
 ---
 
