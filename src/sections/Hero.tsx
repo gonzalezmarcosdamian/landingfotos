@@ -6,7 +6,7 @@ import { ArrowDown } from "lucide-react";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Magnetic } from "@/components/fx/Magnetic";
-import { site } from "@/content/site";
+import { useLang } from "@/i18n/LanguageProvider";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -36,6 +36,7 @@ function MaskReveal({
 }
 
 export function Hero() {
+  const { t } = useLang();
   const ref = useRef<HTMLElement>(null);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -102,10 +103,10 @@ export function Hero() {
             <MaskReveal delay={0.28}>VISUALS</MaskReveal>
           </h1>
           <MaskReveal delay={0.5} className="mt-5 max-w-xl text-lg font-medium text-sf-white md:text-2xl">
-            {site.hero.subheadline}
+            {t.hero.subheadline}
           </MaskReveal>
           <MaskReveal delay={0.6} className="mt-2 max-w-xl text-base text-sf-gray-300 md:text-lg">
-            {site.hero.tagline}
+            {t.hero.tagline}
           </MaskReveal>
           <motion.div
             className="mt-9"
@@ -115,7 +116,7 @@ export function Hero() {
           >
             <Magnetic>
               <ButtonLink href="#portfolio" variant="primary">
-                {site.hero.ctaLabel}
+                {t.hero.cta}
               </ButtonLink>
             </Magnetic>
           </motion.div>

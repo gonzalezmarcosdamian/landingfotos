@@ -5,7 +5,7 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import type { Project } from "@/types/content";
-import { CATEGORY_LABELS } from "@/types/content";
+import { useLang } from "@/i18n/LanguageProvider";
 
 type MediaItem = { type: "video"; src: string } | { type: "image"; src: string };
 
@@ -23,6 +23,7 @@ export function Lightbox({
   project: Project | null;
   onClose: () => void;
 }) {
+  const { t } = useLang();
   const media = useMemo(() => (project ? buildMedia(project) : []), [project]);
   const [index, setIndex] = useState(0);
 
@@ -73,7 +74,7 @@ export function Lightbox({
           <div className="flex items-center justify-between px-5 py-4 md:px-8">
             <div>
               <span className="block text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-sf-red">
-                {CATEGORY_LABELS[project.category]}
+                {t.categories[project.category]}
               </span>
               <h3 className="font-display text-lg font-bold text-sf-white md:text-xl">
                 {project.title}

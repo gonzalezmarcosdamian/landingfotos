@@ -1,8 +1,12 @@
+"use client";
+
 import { Instagram, Mail } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { site } from "@/content/site";
+import { useLang } from "@/i18n/LanguageProvider";
 
 export function Footer() {
+  const { t } = useLang();
   const year = 2026;
 
   return (
@@ -15,11 +19,9 @@ export function Footer() {
           <div>
             <div className="mb-4 h-1 w-12 bg-sf-red" />
             <h2 className="font-display text-3xl font-extrabold uppercase md:text-4xl">
-              Hablemos
+              {t.footer.heading}
             </h2>
-            <p className="mt-3 max-w-md text-sf-gray-300">
-              Contame tu proyecto. Hagamos que tus fotos y videos hablen por sí solos.
-            </p>
+            <p className="mt-3 max-w-md text-sf-gray-300">{t.footer.blurb}</p>
           </div>
 
           <div className="flex flex-col gap-4">
@@ -44,11 +46,9 @@ export function Footer() {
 
         <div className="mt-14 flex flex-col gap-2 border-t border-sf-white/10 pt-6 text-sm text-sf-gray-500 md:flex-row md:items-center md:justify-between">
           <span>
-            © {year} {site.brand}. Todos los derechos reservados.
+            © {year} {site.brand}. {t.footer.rights}
           </span>
-          <span className="uppercase tracking-[0.15em]">
-            Cero exceso, máxima actitud.
-          </span>
+          <span className="uppercase tracking-[0.15em]">{t.footer.tagline}</span>
         </div>
       </Container>
     </footer>

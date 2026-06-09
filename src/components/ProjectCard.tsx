@@ -4,7 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Camera, Play } from "lucide-react";
 import type { Project } from "@/types/content";
-import { CATEGORY_LABELS } from "@/types/content";
+import { useLang } from "@/i18n/LanguageProvider";
 import { cn } from "@/lib/cn";
 
 /** Patrón de placeholder de marca cuando un proyecto aún no tiene foto real. */
@@ -40,11 +40,12 @@ export function ProjectCard({
   featured?: boolean;
   onOpen?: () => void;
 }) {
+  const { t } = useLang();
   const TypeIcon = project.type === "video" ? Play : Camera;
+  const summary = t.projects[project.slug]?.summary;
 
   return (
     <motion.article
-      data-cursor-label="Ver"
       role="button"
       tabIndex={0}
       aria-label={`Ver proyecto ${project.title}`}
@@ -81,7 +82,7 @@ export function ProjectCard({
       <div className="absolute right-4 top-4 flex items-center gap-1.5 rounded-full bg-sf-black/50 px-3 py-1.5 backdrop-blur-sm">
         <TypeIcon className="h-3.5 w-3.5 text-sf-white" strokeWidth={2} />
         <span className="text-[0.7rem] font-medium uppercase tracking-wider text-sf-white">
-          {project.type === "video" ? "Video" : "Foto"}
+          {project.type === "video" ? t.media.video : t.media.photo}
         </span>
       </div>
 
@@ -95,14 +96,14 @@ export function ProjectCard({
       {/* Info inferior */}
       <div className="absolute inset-x-0 bottom-0 p-5">
         <span className="mb-1.5 block text-[0.7rem] font-semibold uppercase tracking-[0.15em] text-sf-red">
-          {CATEGORY_LABELS[project.category]}
+          {t.categories[project.category]}
         </span>
         <h3 className="font-display text-xl font-bold leading-tight text-sf-white">
           {project.title}
         </h3>
-        {project.summary && (
+        {summary && (
           <p className="mt-1 max-h-0 overflow-hidden text-sm text-sf-gray-300 opacity-0 transition-all duration-500 ease-sf group-hover:max-h-20 group-hover:opacity-100">
-            {project.summary}
+            {summary}
           </p>
         )}
       </div>

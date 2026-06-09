@@ -93,11 +93,3 @@ h3,
   }
 }
 
-/* Cursor personalizado: ocultar el nativo solo en dispositivos con puntero fino */
-@media (pointer: fine) {
-  .has-custom-cursor,
-  .has-custom-cursor a,
-  .has-custom-cursor button {
-    cursor: none;
-  }
-}

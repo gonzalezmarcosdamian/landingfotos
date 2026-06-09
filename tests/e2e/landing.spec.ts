@@ -47,4 +47,21 @@ test.describe("portfolio visible (reduced-motion)", () => {
     await cards.last().scrollIntoViewIfNeeded();
     await expect(cards.last()).toBeVisible();
   });
+
+  test("el filtro por categoría segmenta los proyectos", async ({ page }) => {
+    await page.goto("/");
+    const cards = page.locator("#portfolio article");
+    await expect(cards).toHaveCount(10);
+    await page.getByRole("button", { name: /^Surf$/ }).first().click();
+    await expect(cards).toHaveCount(1);
+    await page.getByRole("button", { name: /^Todos$/ }).first().click();
+    await expect(cards).toHaveCount(10);
+  });
+
+  test("el selector de idioma cambia ES/EN", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.getByRole("link", { name: "Servicios" })).toBeVisible();
+    await page.getByRole("button", { name: /Switch to English/i }).click();
+    await expect(page.getByRole("link", { name: "Services" })).toBeVisible();
+  });
 });

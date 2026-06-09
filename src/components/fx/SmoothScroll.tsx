@@ -18,6 +18,14 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
     return () => mq.removeEventListener("change", onChange);
   }, []);
 
+  // La web siempre arranca arriba (clave en mobile): sin restauración de scroll del navegador.
+  useEffect(() => {
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+    window.scrollTo(0, 0);
+  }, []);
+
   if (!enabled) return <>{children}</>;
 
   return (

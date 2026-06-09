@@ -3,8 +3,8 @@ import { Montserrat, Poppins } from "next/font/google";
 import "./globals.css";
 import { SmoothScroll } from "@/components/fx/SmoothScroll";
 import { Grain } from "@/components/fx/Grain";
-import { Cursor } from "@/components/fx/Cursor";
 import { Intro } from "@/components/fx/Intro";
+import { LanguageProvider } from "@/i18n/LanguageProvider";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -70,12 +70,13 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${montserrat.variable} ${poppins.variable}`}>
       <body>
-        <SmoothScroll>
-          <Intro />
-          <Grain />
-          <Cursor />
-          {children}
-        </SmoothScroll>
+        <LanguageProvider>
+          <SmoothScroll>
+            <Intro />
+            <Grain />
+            {children}
+          </SmoothScroll>
+        </LanguageProvider>
       </body>
     </html>
   );

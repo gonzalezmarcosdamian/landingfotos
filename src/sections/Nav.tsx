@@ -4,18 +4,20 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Magnetic } from "@/components/fx/Magnetic";
+import { useLang } from "@/i18n/LanguageProvider";
 import { cn } from "@/lib/cn";
 
-const LINKS = [
-  { label: "Portfolio", href: "#portfolio" },
-  { label: "Sobre mí", href: "#sobre-mi" },
-  { label: "Servicios", href: "#servicios" },
-  { label: "Contacto", href: "#contacto" },
-];
-
 export function Nav() {
+  const { t, lang, toggle } = useLang();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+
+  const links = [
+    { label: t.nav.portfolio, href: "#portfolio" },
+    { label: t.nav.about, href: "#sobre-mi" },
+    { label: t.nav.services, href: "#servicios" },
+    { label: t.nav.contact, href: "#contacto" },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -24,13 +26,27 @@ export function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const LangToggle = ({ className }: { className?: string }) => (
+    <button
+      type="button"
+      onClick={toggle}
+      aria-label={lang === "es" ? "Switch to English" : "Cambiar a español"}
+      className={cn(
+        "flex items-center gap-1 text-[0.8rem] font-semibold uppercase tracking-[0.12em]",
+        className
+      )}
+    >
+      <span className={lang === "es" ? "text-sf-white" : "text-sf-white/40"}>ES</span>
+      <span className="text-sf-white/30">/</span>
+      <span className={lang === "en" ? "text-sf-white" : "text-sf-white/40"}>EN</span>
+    </button>
+  );
+
   return (
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-colors duration-300 ease-sf",
-        scrolled || open
-          ? "bg-sf-black/85 backdrop-blur-md"
-          : "bg-gradient-to-b from-sf-black/40 to-transparent"
+        scrolled || open ? "bg-sf-black/85 backdrop-blur-md" : "bg-gradient-to-b from-sf-black/40 to-transparent"
       )}
     >
       <Container className="flex items-center justify-between py-4">
@@ -45,7 +61,7 @@ export function Nav() {
 
         {/* Desktop */}
         <nav className="hidden items-center gap-8 md:flex">
-          {LINKS.map((l) => (
+          {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
@@ -55,12 +71,13 @@ export function Nav() {
               <span className="absolute -bottom-1 left-0 h-px w-full origin-right scale-x-0 bg-sf-red transition-transform duration-300 ease-sf group-hover:origin-left group-hover:scale-x-100" />
             </a>
           ))}
+          <LangToggle className="ml-2" />
         </nav>
 
         {/* Mobile toggle */}
         <button
           type="button"
-          aria-label={open ? "Cerrar menú" : "Abrir menú"}
+          aria-label={open ? "Cerrar menú" : t.nav.menu}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
           className="text-sf-white md:hidden"
@@ -73,7 +90,7 @@ export function Nav() {
       {open && (
         <nav className="border-t border-sf-white/10 md:hidden">
           <Container className="flex flex-col gap-1 py-4">
-            {LINKS.map((l) => (
+            {links.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
@@ -83,6 +100,7 @@ export function Nav() {
                 {l.label}
               </a>
             ))}
+            <LangToggle className="mt-2 py-3" />
           </Container>
         </nav>
       )}
