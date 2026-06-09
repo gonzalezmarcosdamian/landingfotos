@@ -56,6 +56,9 @@ yarn-error.log*
 # Videos web del hero: se despliegan vía Vercel CLI (.vercelignore), no se versionan
 /public/hero/*.mp4
 /public/hero/*.webm
+# Videos de proyectos (cinematic): se despliegan vía Vercel, no se versionan en git
+/public/projects/*.mp4
+/public/projects/*.webm
 
 # TypeScript
 *.tsbuildinfo

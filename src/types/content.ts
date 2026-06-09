@@ -8,6 +8,7 @@ export type Category =
   | "real-estate"
   | "gastronomia"
   | "estudio"
+  | "estetica"
   | "marca";
 
 export interface Project {
@@ -22,6 +23,10 @@ export interface Project {
   /** texto alternativo (a11y + SEO) — obligatorio si hay cover */
   coverAlt?: string;
   summary?: string;
+  /** galería de fotos del proyecto (para el lightbox) */
+  gallery?: string[];
+  /** video cinematic del proyecto (para el lightbox de proyectos de video) */
+  video?: string;
   featured: boolean;
   order: number;
 }
@@ -61,5 +66,6 @@ export const CATEGORY_LABELS: Record<Category, string> = {
   "real-estate": "Real Estate",
   gastronomia: "Gastronomía",
   estudio: "Estudio",
+  estetica: "Estética",
   marca: "Marca",
 };

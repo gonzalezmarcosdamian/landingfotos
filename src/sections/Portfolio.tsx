@@ -1,11 +1,14 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { ProjectCard } from "@/components/ProjectCard";
 import { Reveal } from "@/components/Reveal";
 import { Marquee } from "@/components/fx/Marquee";
+import { Lightbox } from "@/components/Lightbox";
 import { getFeaturedProjects } from "@/content/projects";
+import type { Project } from "@/types/content";
 import { clipReveal, revealOnce, staggerContainer } from "@/lib/motion";
 
 const MARQUEE_ITEMS = [
@@ -13,13 +16,14 @@ const MARQUEE_ITEMS = [
   "Surf",
   "Real Estate",
   "Gastronomía",
+  "Estética",
   "Estudio",
   "Marcas",
 ];
 
 export function Portfolio() {
   const projects = getFeaturedProjects();
-  const [feature, ...rest] = projects;
+  const [active, setActive] = useState<Project | null>(null);
 
   return (
     <section id="portfolio" className="bg-sf-white pt-[clamp(4rem,10vw,8rem)]">
@@ -36,14 +40,7 @@ export function Portfolio() {
           </p>
         </Reveal>
 
-        {/* Pieza destacada (asimétrica) */}
-        {feature && (
-          <Reveal className="mb-5 h-[60vh] min-h-[380px]">
-            <ProjectCard project={feature} index={1} featured />
-          </Reveal>
-        )}
-
-        {/* Grilla del resto */}
+        {/* Grilla uniforme de tarjetas verticales (el contenido es vertical) */}
         <motion.div
           className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
           variants={staggerContainer}
@@ -51,9 +48,13 @@ export function Portfolio() {
           whileInView={revealOnce.whileInView}
           viewport={revealOnce.viewport}
         >
-          {rest.map((project, i) => (
+          {projects.map((project, i) => (
             <motion.div key={project.slug} variants={clipReveal}>
-              <ProjectCard project={project} index={i + 2} />
+              <ProjectCard
+                project={project}
+                index={i + 1}
+                onOpen={() => setActive(project)}
+              />
             </motion.div>
           ))}
         </motion.div>
@@ -63,6 +64,8 @@ export function Portfolio() {
       <div className="mt-[clamp(4rem,10vw,8rem)]">
         <Marquee items={MARQUEE_ITEMS} />
       </div>
+
+      <Lightbox project={active} onClose={() => setActive(null)} />
     </section>
   );
 }

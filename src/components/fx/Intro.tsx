@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 
 /**
@@ -24,25 +25,24 @@ export function Intro() {
     <AnimatePresence>
       {show && (
         <motion.div
-          className="fixed inset-0 z-[9000] flex items-center justify-center bg-sf-black"
+          className="fixed inset-0 z-[9000] flex items-center justify-center bg-black"
           initial={{ y: 0 }}
           exit={{ y: "-100%" }}
           transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
         >
           <motion.div
-            className="overflow-hidden"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.4 }}
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
           >
-            <motion.span
-              className="block font-display text-2xl font-extrabold uppercase tracking-tight text-sf-white md:text-4xl"
-              initial={{ y: "110%" }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-            >
-              Salt Frame<span className="text-sf-red">.</span>
-            </motion.span>
+            <Image
+              src="/logo.png"
+              alt="Salt Frame Visuals"
+              width={280}
+              height={110}
+              priority
+              className="w-48 md:w-64"
+            />
           </motion.div>
         </motion.div>
       )}

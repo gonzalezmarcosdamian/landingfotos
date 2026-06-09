@@ -33,18 +33,30 @@ export function ProjectCard({
   project,
   index,
   featured = false,
+  onOpen,
 }: {
   project: Project;
   index?: number;
   featured?: boolean;
+  onOpen?: () => void;
 }) {
   const TypeIcon = project.type === "video" ? Play : Camera;
 
   return (
     <motion.article
       data-cursor-label="Ver"
+      role="button"
+      tabIndex={0}
+      aria-label={`Ver proyecto ${project.title}`}
+      onClick={onOpen}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onOpen?.();
+        }
+      }}
       className={cn(
-        "group relative overflow-hidden rounded-[2px] bg-sf-black",
+        "group relative cursor-pointer overflow-hidden rounded-[2px] bg-sf-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sf-red",
         featured ? "h-full" : "aspect-[4/5]"
       )}
       whileHover={{ y: -4 }}
