@@ -32,7 +32,7 @@ export function Portfolio() {
             Proyectos destacados
           </h2>
           <p className="mt-4 text-lg text-sf-gray-700">
-            Deporte, surf, real estate y gastronomía. Que las imágenes griten por sí solas.
+            Deporte, surf, real estate y gastronomía. Que las imágenes hablen por sí solas.
           </p>
         </Reveal>
 

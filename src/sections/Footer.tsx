@@ -18,7 +18,7 @@ export function Footer() {
               Hablemos
             </h2>
             <p className="mt-3 max-w-md text-sf-gray-300">
-              Contame tu proyecto. Hagamos que tus fotos y videos griten por sí solos.
+              Contame tu proyecto. Hagamos que tus fotos y videos hablen por sí solos.
             </p>
           </div>
 
