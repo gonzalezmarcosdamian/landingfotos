@@ -1,4 +1,17 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, type Page } from "@playwright/test";
+
+async function dismissIntro(page: Page) {
+  await page.locator('[class*="z-[9000]"]').waitFor({ state: "detached" }).catch(() => {});
+}
+
+/** clipPath del wrapper de reveal de la primera tarjeta (oculto = contiene "100%"). */
+async function firstCardClip(page: Page): Promise<string> {
+  return page.evaluate(() => {
+    const card = document.querySelector("#portfolio article");
+    if (!card || !card.parentElement) return "no-card";
+    return getComputedStyle(card.parentElement).clipPath;
+  });
+}
 
 test("la landing carga con el hero y el CTA de portfolio", async ({ page }) => {
   await page.goto("/");
@@ -15,37 +28,56 @@ test("la navegación lleva a las secciones", async ({ page }) => {
 });
 
 /**
- * Estos tests usan reduced-motion: ejercitan el camino sin animación, donde las
- * tarjetas se muestran de inmediato (fallback crítico de accesibilidad). Garantiza
- * que el contenido nunca queda oculto, también en mobile.
+ * Visualización de proyectos en el camino ANIMADO real (sin reduced-motion),
+ * en web y mobile web. Verifica que las tarjetas se REVELAN (no quedan ocultas por
+ * clip-path) — también al filtrar, que re-monta la grilla estando ya en viewport
+ * (el caso que fallaba y dejaba el portfolio en blanco).
  */
-test.describe("portfolio visible (reduced-motion)", () => {
+const VIEWPORTS = [
+  { name: "web", width: 1280, height: 900 },
+  { name: "mobile web", width: 390, height: 844 },
+];
+
+for (const vp of VIEWPORTS) {
+  test.describe(`visualización de proyectos — ${vp.name}`, () => {
+    test.use({ viewport: { width: vp.width, height: vp.height } });
+
+    test("los 10 proyectos se ven (revelados)", async ({ page }) => {
+      await page.goto("/");
+      await dismissIntro(page);
+      await page.locator("#portfolio").scrollIntoViewIfNeeded();
+      await expect(page.locator("#portfolio article")).toHaveCount(10);
+      await expect.poll(() => firstCardClip(page), { timeout: 6000 }).not.toContain("100%");
+    });
+
+    test("al filtrar (Gastronomía) las tarjetas se revelan", async ({ page }) => {
+      await page.goto("/");
+      await dismissIntro(page);
+      await page.locator("#portfolio").scrollIntoViewIfNeeded();
+      await page.getByRole("button", { name: /Gastronom|Food/ }).first().click();
+      await expect(page.locator("#portfolio article")).toHaveCount(2);
+      await expect.poll(() => firstCardClip(page), { timeout: 6000 }).not.toContain("100%");
+    });
+  });
+}
+
+/**
+ * Funcionalidad (lightbox, filtro, idioma) con reduced-motion: evita la flakiness
+ * de hit-testing de la animación en headless.
+ */
+test.describe("funcionalidad (reduced-motion)", () => {
   test.use({ reducedMotion: "reduce" });
 
-  test("las tarjetas se ven y abren el lightbox", async ({ page }) => {
+  test("las tarjetas abren el lightbox", async ({ page }) => {
     await page.goto("/");
-    // esperar a que el splash (intro) se retire para no interceptar clicks
-    await page.locator('[class*="z-[9000]"]').waitFor({ state: "detached" }).catch(() => {});
+    await dismissIntro(page);
     const firstCard = page.locator("#portfolio article").first();
     await firstCard.scrollIntoViewIfNeeded();
     await expect(firstCard).toBeVisible();
-    // dispatchEvent evita la flakiness de hit-testing del reveal en headless;
-    // verifica el comportamiento real (el handler de la tarjeta abre el lightbox).
     await firstCard.dispatchEvent("click");
     await expect(page.getByRole("dialog")).toBeVisible();
     await page.keyboard.press("Escape");
     await expect(page.getByRole("dialog")).toHaveCount(0);
-  });
-
-  test("el portfolio muestra los 10 proyectos también en mobile", async ({ page }) => {
-    await page.setViewportSize({ width: 390, height: 844 });
-    await page.goto("/");
-    const cards = page.locator("#portfolio article");
-    await expect(cards).toHaveCount(10);
-    await cards.first().scrollIntoViewIfNeeded();
-    await expect(cards.first()).toBeVisible();
-    await cards.last().scrollIntoViewIfNeeded();
-    await expect(cards.last()).toBeVisible();
   });
 
   test("el filtro por categoría segmenta los proyectos", async ({ page }) => {

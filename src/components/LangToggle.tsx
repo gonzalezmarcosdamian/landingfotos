@@ -14,15 +14,21 @@ function FlagEs() {
   );
 }
 
-/** Bandera del Reino Unido (Union Jack simplificado). */
+/** Bandera de Estados Unidos (simplificada para tamaño chico). */
 function FlagEn() {
+  const h = 20 / 13;
   return (
-    <svg viewBox="0 0 60 30" className="h-full w-full" aria-hidden="true">
-      <rect width="60" height="30" fill="#012169" />
-      <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" strokeWidth="6" />
-      <path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" strokeWidth="4" />
-      <path d="M30,0 V30 M0,15 H60" stroke="#fff" strokeWidth="10" />
-      <path d="M30,0 V30 M0,15 H60" stroke="#C8102E" strokeWidth="6" />
+    <svg viewBox="0 0 38 20" className="h-full w-full" aria-hidden="true">
+      <rect width="38" height="20" fill="#FFFFFF" />
+      {[0, 2, 4, 6, 8, 10, 12].map((i) => (
+        <rect key={i} y={i * h} width="38" height={h} fill="#B22234" />
+      ))}
+      <rect width="15.2" height={7 * h} fill="#3C3B6E" />
+      {[0, 1, 2].map((r) =>
+        [0, 1, 2, 3].map((c) => (
+          <circle key={`${r}-${c}`} cx={2 + c * 4} cy={2 + r * 3.2} r="0.7" fill="#FFFFFF" />
+        ))
+      )}
     </svg>
   );
 }

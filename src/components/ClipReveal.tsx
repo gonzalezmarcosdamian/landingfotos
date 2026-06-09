@@ -7,13 +7,18 @@ import { clipReveal } from "@/lib/motion";
 interface ClipRevealProps {
   children: ReactNode;
   className?: string;
+  delay?: number;
 }
 
 /**
- * Reveal con máscara (clip-path) al entrar en viewport, POR elemento.
- * Con prefers-reduced-motion muestra el contenido de inmediato (nunca lo oculta).
+ * Reveal con máscara (clip-path) que anima AL MONTAR el elemento.
+ *
+ * Importante: usar `animate` (no `whileInView`) garantiza que el contenido SIEMPRE
+ * se muestre — también cuando la grilla se re-monta al filtrar por categoría estando
+ * ya dentro del viewport (donde `whileInView` no vuelve a disparar y dejaba todo en blanco).
+ * Con prefers-reduced-motion se muestra de inmediato, sin animación.
  */
-export function ClipReveal({ children, className }: ClipRevealProps) {
+export function ClipReveal({ children, className, delay = 0 }: ClipRevealProps) {
   const reduced = useReducedMotion();
 
   if (reduced) {
@@ -25,8 +30,8 @@ export function ClipReveal({ children, className }: ClipRevealProps) {
       className={className}
       variants={clipReveal}
       initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+      animate="visible"
+      transition={{ delay }}
     >
       {children}
     </motion.div>

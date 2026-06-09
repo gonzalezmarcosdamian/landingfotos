@@ -78,7 +78,7 @@ export function Portfolio() {
           className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3"
         >
           {visible.map((project, i) => (
-            <ClipReveal key={project.slug}>
+            <ClipReveal key={project.slug} delay={Math.min(i * 0.05, 0.4)}>
               <ProjectCard project={project} index={i + 1} onOpen={() => setActive(project)} />
             </ClipReveal>
           ))}
