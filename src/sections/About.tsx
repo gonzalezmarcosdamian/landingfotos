@@ -1,6 +1,6 @@
-import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/Reveal";
+import { ParallaxImage } from "@/components/ParallaxImage";
 import { site } from "@/content/site";
 
 export function About() {
@@ -17,15 +17,13 @@ export function About() {
               <br />
               como ventaja.
             </h2>
-            <div className="relative aspect-[4/5] w-full max-w-sm overflow-hidden rounded-[2px]">
-              <Image
-                src="/about/cae.jpg"
-                alt="Cae, creativo detrás de Salt Frame Visuals"
-                fill
-                sizes="(max-width: 768px) 100vw, 30vw"
-                className="object-cover"
-              />
-            </div>
+            <ParallaxImage
+              src="/about/cae.jpg"
+              alt="Cae, creativo detrás de Salt Frame Visuals"
+              className="aspect-[4/5] w-full max-w-sm rounded-[2px]"
+              sizes="(max-width: 768px) 100vw, 30vw"
+              intensity={6}
+            />
           </Reveal>
 
           <div className="space-y-6 md:col-span-6 md:col-start-7 md:pt-2">

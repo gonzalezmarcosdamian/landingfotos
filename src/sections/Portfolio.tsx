@@ -1,15 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { ProjectCard } from "@/components/ProjectCard";
 import { Reveal } from "@/components/Reveal";
+import { ClipReveal } from "@/components/ClipReveal";
 import { Marquee } from "@/components/fx/Marquee";
 import { Lightbox } from "@/components/Lightbox";
 import { getFeaturedProjects } from "@/content/projects";
 import type { Project } from "@/types/content";
-import { clipReveal, revealOnce, staggerContainer } from "@/lib/motion";
 
 const MARQUEE_ITEMS = [
   "Deporte",
@@ -40,24 +39,19 @@ export function Portfolio() {
           </p>
         </Reveal>
 
-        {/* Grilla uniforme de tarjetas verticales (el contenido es vertical) */}
-        <motion.div
-          className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
-          variants={staggerContainer}
-          initial={revealOnce.initial}
-          whileInView={revealOnce.whileInView}
-          viewport={revealOnce.viewport}
-        >
+        {/* Grilla uniforme de tarjetas verticales (reveal POR tarjeta:
+            confiable en mobile, donde el contenedor es más alto que el viewport) */}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
           {projects.map((project, i) => (
-            <motion.div key={project.slug} variants={clipReveal}>
+            <ClipReveal key={project.slug}>
               <ProjectCard
                 project={project}
                 index={i + 1}
                 onOpen={() => setActive(project)}
               />
-            </motion.div>
+            </ClipReveal>
           ))}
-        </motion.div>
+        </div>
       </Container>
 
       {/* Marquee de categorías */}

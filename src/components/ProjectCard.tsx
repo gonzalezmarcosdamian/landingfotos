@@ -67,7 +67,7 @@ export function ProjectCard({
           src={project.cover}
           alt={project.coverAlt ?? project.title}
           fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className="object-cover transition-transform duration-700 ease-sf group-hover:scale-105"
         />
       ) : (
