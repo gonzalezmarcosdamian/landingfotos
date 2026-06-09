@@ -4,11 +4,12 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Magnetic } from "@/components/fx/Magnetic";
+import { LangToggle } from "@/components/LangToggle";
 import { useLang } from "@/i18n/LanguageProvider";
 import { cn } from "@/lib/cn";
 
 export function Nav() {
-  const { t, lang, toggle } = useLang();
+  const { t } = useLang();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -25,22 +26,6 @@ export function Nav() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  const LangToggle = ({ className }: { className?: string }) => (
-    <button
-      type="button"
-      onClick={toggle}
-      aria-label={lang === "es" ? "Switch to English" : "Cambiar a español"}
-      className={cn(
-        "flex items-center gap-1 text-[0.8rem] font-semibold uppercase tracking-[0.12em]",
-        className
-      )}
-    >
-      <span className={lang === "es" ? "text-sf-white" : "text-sf-white/40"}>ES</span>
-      <span className="text-sf-white/30">/</span>
-      <span className={lang === "en" ? "text-sf-white" : "text-sf-white/40"}>EN</span>
-    </button>
-  );
 
   return (
     <header

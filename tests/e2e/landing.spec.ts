@@ -58,10 +58,12 @@ test.describe("portfolio visible (reduced-motion)", () => {
     await expect(cards).toHaveCount(10);
   });
 
-  test("el selector de idioma cambia ES/EN", async ({ page }) => {
+  test("el selector de idioma (banderas) cambia ES/EN", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByRole("link", { name: "Servicios" })).toBeVisible();
-    await page.getByRole("button", { name: /Switch to English/i }).click();
+    await page.getByRole("button", { name: "English" }).first().click();
     await expect(page.getByRole("link", { name: "Services" })).toBeVisible();
+    await page.getByRole("button", { name: "Español" }).first().click();
+    await expect(page.getByRole("link", { name: "Servicios" })).toBeVisible();
   });
 });
