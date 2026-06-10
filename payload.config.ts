@@ -37,7 +37,12 @@ export default buildConfig({
   },
   secret: process.env.PAYLOAD_SECRET || "dev-secret-change-me",
   db: usePostgres
-    ? postgresAdapter({ pool: { connectionString: dbUri } })
+    ? postgresAdapter({
+        pool: { connectionString: dbUri },
+        // Aísla las tablas en un schema propio para poder COMPARTIR la base de
+        // datos con otros proyectos (p. ej. lexcore) sin colisiones de tablas.
+        schemaName: process.env.DB_SCHEMA || "salt_frame",
+      })
     : sqliteAdapter({ client: { url: dbUri } }),
   sharp,
   typescript: { outputFile: path.resolve(dirname, "src/payload-types.ts") },
