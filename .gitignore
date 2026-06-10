@@ -45,6 +45,12 @@ yarn-error.log*
 # Vercel
 .vercel
 
+# Payload CMS
+/cms.db
+/cms.db-*
+/public/media/cms
+/.payloadcms
+
 # Media — originales pesados no se versionan (ver docs/05-MEDIA-GUIDE.md)
 /public/media/raw/**
 !/public/media/raw/**/

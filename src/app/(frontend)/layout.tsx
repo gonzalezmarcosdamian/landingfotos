@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Montserrat, Poppins } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import { SmoothScroll } from "@/components/fx/SmoothScroll";
 import { Grain } from "@/components/fx/Grain";
 import { Intro } from "@/components/fx/Intro";
@@ -65,7 +65,7 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default async function RootLayout({
+export default async function FrontendLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const { dictionaries } = await getSiteContent();
