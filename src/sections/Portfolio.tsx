@@ -7,7 +7,6 @@ import { Reveal } from "@/components/Reveal";
 import { ClipReveal } from "@/components/ClipReveal";
 import { Marquee } from "@/components/fx/Marquee";
 import { Lightbox } from "@/components/Lightbox";
-import { getFeaturedProjects } from "@/content/projects";
 import type { Category, Project } from "@/types/content";
 import { useLang } from "@/i18n/LanguageProvider";
 import { cn } from "@/lib/cn";
@@ -24,9 +23,8 @@ const CATEGORY_ORDER: Category[] = [
 
 type Filter = Category | "all";
 
-export function Portfolio() {
+export function Portfolio({ projects }: { projects: Project[] }) {
   const { t } = useLang();
-  const projects = getFeaturedProjects();
   const [active, setActive] = useState<Project | null>(null);
   const [filter, setFilter] = useState<Filter>("all");
 

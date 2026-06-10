@@ -5,6 +5,7 @@ import { About } from "@/sections/About";
 import { Services } from "@/sections/Services";
 import { Footer } from "@/sections/Footer";
 import { site } from "@/content/site";
+import { getSiteContent } from "@/content/source";
 
 /** Datos estructurados JSON-LD para SEO local (ProfessionalService). */
 function StructuredData() {
@@ -27,14 +28,15 @@ function StructuredData() {
   );
 }
 
-export default function Home() {
+export default async function Home() {
+  const { projects } = await getSiteContent();
   return (
     <>
       <StructuredData />
       <Nav />
       <main>
         <Hero />
-        <Portfolio />
+        <Portfolio projects={projects} />
         <About />
         <Services />
       </main>

@@ -5,6 +5,7 @@ import { SmoothScroll } from "@/components/fx/SmoothScroll";
 import { Grain } from "@/components/fx/Grain";
 import { Intro } from "@/components/fx/Intro";
 import { LanguageProvider } from "@/i18n/LanguageProvider";
+import { getSiteContent } from "@/content/source";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -64,13 +65,14 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const { dictionaries } = await getSiteContent();
   return (
     <html lang="es" className={`${montserrat.variable} ${poppins.variable}`}>
       <body>
-        <LanguageProvider>
+        <LanguageProvider dictionaries={dictionaries}>
           <SmoothScroll>
             <Intro />
             <Grain />

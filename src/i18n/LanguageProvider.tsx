@@ -9,7 +9,12 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { DEFAULT_LANG, dictionaries, type Dict, type Lang } from "./dictionaries";
+import {
+  DEFAULT_LANG,
+  dictionaries as staticDictionaries,
+  type Dict,
+  type Lang,
+} from "./dictionaries";
 
 interface LanguageContextValue {
   lang: Lang;
@@ -22,7 +27,17 @@ const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 const STORAGE_KEY = "sf-lang";
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
+/**
+ * Provee idioma + diccionario. Los diccionarios se inyectan desde el server
+ * (contenido del CMS o estático); si no se pasan, usa el estático.
+ */
+export function LanguageProvider({
+  children,
+  dictionaries = staticDictionaries,
+}: {
+  children: ReactNode;
+  dictionaries?: Record<Lang, Dict>;
+}) {
   const [lang, setLangState] = useState<Lang>(DEFAULT_LANG);
 
   // Restaura el idioma elegido (sin romper la hidratación: corre tras el montaje).
@@ -51,7 +66,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   const value = useMemo<LanguageContextValue>(
     () => ({ lang, setLang, toggle, t: dictionaries[lang] }),
-    [lang, setLang, toggle]
+    [lang, setLang, toggle, dictionaries]
   );
 
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
