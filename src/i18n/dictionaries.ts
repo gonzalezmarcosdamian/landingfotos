@@ -67,15 +67,19 @@ const es: Dict = {
     headingL2: "pensado para vender.",
     cta: "Hablemos",
     items: [
-      { title: "Fotografía deportiva", description: "Capturo el movimiento, la intensidad y la pasión." },
       {
-        title: "Videos comerciales que venden sin idioma",
-        description:
-          "Para restaurantes, inmobiliarias, gimnasios y todo negocio que quiera darse a conocer o elevar la calidad de su contenido en redes. Más alcance y mejores clientes.",
+        title: "Fotografía deportiva",
+        description: "Congelo el instante decisivo: movimiento, intensidad y pasión.",
       },
       {
-        title: "Contenido personalizado para marcas que quieren distinguir",
-        description: "Me adapto y busco que las sesiones sean amenas, dinámicas y productivas.",
+        title: "Video comercial que vende sin idioma",
+        description:
+          "Para restaurantes, inmobiliarias, gimnasios y toda marca que quiera darse a conocer o elevar la calidad de su contenido en redes. Más alcance y mejores clientes.",
+      },
+      {
+        title: "Adaptado estratégicamente a las necesidades de tu proyecto",
+        description:
+          "Contenido a medida para marcas que quieren distinguirse — sesiones amenas, dinámicas y productivas.",
       },
     ],
   },
@@ -138,15 +142,19 @@ const en: Dict = {
     headingL2: "built to sell.",
     cta: "Let's talk",
     items: [
-      { title: "Sports photography", description: "I capture movement, intensity and passion." },
       {
-        title: "Commercial videos that sell without words",
-        description:
-          "For restaurants, real estate, gyms and any business that wants to grow or elevate its social content. More reach, better clients.",
+        title: "Sports photography",
+        description: "I freeze the decisive moment — movement, intensity and passion.",
       },
       {
-        title: "Custom content for brands that want to stand out",
-        description: "I adapt and make every session enjoyable, dynamic and productive.",
+        title: "Commercial video that sells without words",
+        description:
+          "For restaurants, real estate, gyms and any brand that wants to grow or raise the quality of its social content. More reach, better clients.",
+      },
+      {
+        title: "Strategically tailored to your project's needs",
+        description:
+          "Custom content for brands that want to stand out — sessions that stay enjoyable, dynamic and productive.",
       },
     ],
   },
