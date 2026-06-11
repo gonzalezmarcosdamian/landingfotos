@@ -42,6 +42,8 @@ export default buildConfig({
         // Aísla las tablas en un schema propio para poder COMPARTIR la base de
         // datos con otros proyectos (p. ej. lexcore) sin colisiones de tablas.
         schemaName: process.env.DB_SCHEMA || "salt_frame",
+        // Crea/sincroniza el esquema al iniciar (DB nueva, sin migraciones).
+        push: true,
       })
     : sqliteAdapter({ client: { url: dbUri } }),
   sharp,
