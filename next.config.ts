@@ -15,6 +15,10 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   images: {
     formats: ["image/avif", "image/webp"],
+    // Medios servidos desde Cloudinary (CDN del backoffice).
+    remotePatterns: [
+      { protocol: "https", hostname: "res.cloudinary.com", pathname: "/**" },
+    ],
   },
   async headers() {
     return [{ source: "/(.*)", headers: securityHeaders }];

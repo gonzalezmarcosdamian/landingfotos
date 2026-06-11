@@ -20,5 +20,10 @@ export interface SiteContent {
 
 /** Fuente única de contenido del sitio. Cacheada por request (React cache). */
 export const getSiteContent = cache(async (): Promise<SiteContent> => {
+  // Intenta el CMS (Payload en Railway); ante cualquier fallo, contenido estático.
+  // El import dinámico evita acoplar el bundle estático al módulo del CMS.
+  const { getCmsContent } = await import("@/content/cms-source");
+  const cms = await getCmsContent();
+  if (cms) return cms;
   return { dictionaries, projects: getFeaturedProjects() };
 });
