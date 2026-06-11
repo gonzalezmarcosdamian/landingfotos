@@ -3,9 +3,11 @@ import type { CollectionConfig } from "payload";
 const authenticated = ({ req }: { req: { user?: unknown } }) => Boolean(req.user);
 
 /**
- * Biblioteca de medios (fotos y videos). Subida con upload de Payload.
- * En dev guarda en disco (./public/media/cms); en prod se conecta un storage
- * adapter (Cloudinary / Vercel Blob) — ver docs/03-BACKOFFICE.md.
+ * Biblioteca de medios (fotos y videos).
+ * El storage lo maneja Cloudinary (plugin payload-storage-cloudinary):
+ * los archivos se suben al CDN y Payload guarda la URL. `disableLocalStorage`
+ * evita escribir al disco efímero de Railway. Las variantes (calidad/formato)
+ * las resuelve Cloudinary on-the-fly vía transformaciones en la URL.
  */
 export const Media: CollectionConfig = {
   slug: "media",
@@ -17,13 +19,8 @@ export const Media: CollectionConfig = {
     delete: authenticated,
   },
   upload: {
-    staticDir: "public/media/cms",
+    disableLocalStorage: true,
     mimeTypes: ["image/*", "video/*"],
-    imageSizes: [
-      { name: "thumbnail", width: 480 },
-      { name: "card", width: 1024 },
-      { name: "full", width: 2000 },
-    ],
   },
   fields: [
     {

@@ -4,6 +4,7 @@ import { buildConfig } from "payload";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { sqliteAdapter } from "@payloadcms/db-sqlite";
 import { postgresAdapter } from "@payloadcms/db-postgres";
+import { cloudinaryStorage } from "payload-storage-cloudinary";
 import sharp from "sharp";
 
 import { Users } from "./src/collections/Users";
@@ -46,6 +47,25 @@ export default buildConfig({
         push: true,
       })
     : sqliteAdapter({ client: { url: dbUri } }),
+  plugins: [
+    cloudinaryStorage({
+      cloudConfig: {
+        cloud_name: process.env.CLOUDINARY_CLOUD_NAME as string,
+        api_key: process.env.CLOUDINARY_API_KEY as string,
+        api_secret: process.env.CLOUDINARY_API_SECRET as string,
+      },
+      collections: {
+        media: {
+          folder: "salt-frame",
+          transformations: {
+            // No tocamos el original; las optimizaciones van por URL.
+            default: { quality: "auto", fetch_format: "auto" },
+            preserveOriginal: true,
+          },
+        },
+      },
+    }),
+  ],
   sharp,
   typescript: { outputFile: path.resolve(dirname, "src/payload-types.ts") },
 });
