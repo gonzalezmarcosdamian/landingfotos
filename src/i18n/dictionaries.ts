@@ -106,7 +106,7 @@ const es: Dict = {
 const en: Dict = {
   nav: { portfolio: "Portfolio", about: "About", services: "Services", contact: "Contact", menu: "Menu" },
   hero: {
-    subheadline: "Vibrant images. Videos that move.",
+    subheadline: "Vibrant visuals. Impactful videos.",
     tagline: "Audiovisual content with attitude, for brands.",
     cta: "Portfolio",
   },
