@@ -7,11 +7,10 @@ import type { Project } from "@/types/content";
 /**
  * Capa de abstracción de contenido (CMS-ready).
  *
- * La landing lee SIEMPRE por acá. Hoy devuelve el contenido estático tipado;
- * cuando se conecta el backoffice (Payload), `getSiteContent` consulta la base
- * de datos. Los componentes no saben de dónde viene el dato → migración sin tocar UI.
- *
- * Ver docs/03-BACKOFFICE.md y docs/07-BACKOFFICE-STRATEGY.md.
+ * La landing lee SIEMPRE por acá. En `main` devuelve el contenido estático tipado.
+ * El backoffice (Payload) vive en la rama `feat/backoffice-payload` y se desplegará
+ * en Railway; cuando esté en vivo, esta función consultará su API y los componentes
+ * no cambian. Ver docs/03-BACKOFFICE.md y docs/09-BACKOFFICE-SETUP.md.
  */
 export interface SiteContent {
   dictionaries: Record<Lang, Dict>;
@@ -19,23 +18,7 @@ export interface SiteContent {
   projects: Project[];
 }
 
-function getStaticContent(): SiteContent {
-  return { dictionaries, projects: getFeaturedProjects() };
-}
-
-/**
- * Fuente única de contenido del sitio. Cacheada por request (React cache).
- * Cuando `USE_CMS=true` y hay DB, lee de Payload; si no, fallback estático.
- */
+/** Fuente única de contenido del sitio. Cacheada por request (React cache). */
 export const getSiteContent = cache(async (): Promise<SiteContent> => {
-  if (process.env.USE_CMS === "true") {
-    try {
-      const { getPayloadContent } = await import("@/content/payload-source");
-      return await getPayloadContent();
-    } catch {
-      // Si el CMS no está disponible, no romper el sitio: fallback estático.
-      return getStaticContent();
-    }
-  }
-  return getStaticContent();
+  return { dictionaries, projects: getFeaturedProjects() };
 });
