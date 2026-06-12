@@ -23,10 +23,24 @@ const usePostgres = dbUri.startsWith("postgres");
 export default buildConfig({
   admin: {
     user: Users.slug,
-    meta: { titleSuffix: " · Salt Frame Visuals" },
+    meta: {
+      titleSuffix: " · Salt Frame Visuals",
+      title: "Salt Frame Visuals",
+    },
+    // Componentes de marca y guía (resueltos vía import map).
+    importMap: { baseDir: path.resolve(dirname, "src") },
+    components: {
+      graphics: {
+        Logo: "/admin/components/Logo#Logo",
+        Icon: "/admin/components/Icon#Icon",
+      },
+      beforeDashboard: ["/admin/components/Welcome#Welcome"],
+      providers: ["/admin/components/BrandProvider#BrandProvider"],
+    },
   },
   editor: lexicalEditor(),
-  collections: [Users, Media, Categories, Projects],
+  // Orden de navegación pensado para el fotógrafo: portfolio primero.
+  collections: [Projects, Categories, Media, Users],
   globals: [SiteSettings],
   localization: {
     locales: [

@@ -11,7 +11,12 @@ const authenticated = ({ req }: { req: { user?: unknown } }) => Boolean(req.user
  */
 export const Media: CollectionConfig = {
   slug: "media",
-  admin: { group: "Contenido" },
+  labels: { singular: "Foto o video", plural: "Biblioteca" },
+  admin: {
+    group: "Biblioteca",
+    description: "Todas tus fotos y videos. Subí material acá para usarlo en las publicaciones.",
+    defaultColumns: ["filename", "alt", "mimeType"],
+  },
   access: {
     read: () => true, // medios públicos (se muestran en la web)
     create: authenticated,
@@ -28,7 +33,8 @@ export const Media: CollectionConfig = {
       type: "text",
       required: true,
       localized: true,
-      admin: { description: "Texto alternativo (accesibilidad y SEO)." },
+      label: "Descripción",
+      admin: { description: "Qué se ve en la imagen (ayuda al SEO y la accesibilidad)." },
     },
   ],
 };

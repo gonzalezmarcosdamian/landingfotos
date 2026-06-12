@@ -6,7 +6,13 @@ const authenticated = ({ req }: { req: { user?: unknown } }) => Boolean(req.user
 /** Categorías del portfolio (editables por el cliente). */
 export const Categories: CollectionConfig = {
   slug: "categories",
-  admin: { useAsTitle: "name", group: "Contenido", defaultColumns: ["name", "slug", "order"] },
+  labels: { singular: "Categoría", plural: "Categorías" },
+  admin: {
+    useAsTitle: "name",
+    group: "Portfolio",
+    defaultColumns: ["name", "slug", "order"],
+    description: "Las secciones del portfolio (Deporte, Surf, Gastronomía, etc.).",
+  },
   access: {
     read: () => true,
     create: authenticated,

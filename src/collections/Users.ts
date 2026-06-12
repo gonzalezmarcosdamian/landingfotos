@@ -7,7 +7,8 @@ export const Users: CollectionConfig = {
     maxLoginAttempts: 5,
     lockTime: 10 * 60 * 1000, // 10 min
   },
-  admin: { useAsTitle: "email", group: "Administración" },
+  labels: { singular: "Usuario", plural: "Usuarios" },
+  admin: { useAsTitle: "email", group: "Cuenta" },
   access: {
     // Solo admins crean/borran usuarios; cualquiera autenticado se lee a sí mismo.
     create: ({ req }) => req.user?.role === "admin",

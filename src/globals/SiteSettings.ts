@@ -9,7 +9,10 @@ const authenticated = ({ req }: { req: { user?: unknown } }) => Boolean(req.user
 export const SiteSettings: GlobalConfig = {
   slug: "site-settings",
   label: "Textos del sitio",
-  admin: { group: "Contenido" },
+  admin: {
+    group: "Sitio",
+    description: "Los textos de la web: inicio, “Sobre mí”, servicios y contacto. Editá cada idioma con el selector ES/EN.",
+  },
   access: { read: () => true, update: authenticated },
   fields: [
     {
