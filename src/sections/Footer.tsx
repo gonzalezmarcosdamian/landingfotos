@@ -40,7 +40,7 @@ export function Footer() {
               className="group flex items-center gap-3 text-lg text-sf-white transition-colors hover:text-sf-red"
             >
               <WhatsAppIcon className="h-5 w-5 shrink-0" />
-              <span>{site.contact.whatsapp}</span>
+              <span>WhatsApp</span>
             </a>
             <a
               href={site.contact.instagramUrl}
