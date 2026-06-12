@@ -22,6 +22,7 @@ export interface Dict {
     headingL1: string;
     headingL2: string;
     cta: string;
+    whatsappMessage: string;
     items: { title: string; description: string }[];
   };
   footer: { heading: string; blurb: string; rights: string; tagline: string };
@@ -66,6 +67,7 @@ const es: Dict = {
     headingL1: "Contenido con actitud,",
     headingL2: "pensado para vender.",
     cta: "Hablemos",
+    whatsappMessage: "¡Hola Cae! Quiero hablar sobre un proyecto con Salt Frame Visuals.",
     items: [
       {
         title: "Fotografía deportiva",
@@ -141,6 +143,7 @@ const en: Dict = {
     headingL1: "Content with attitude,",
     headingL2: "built to sell.",
     cta: "Let's talk",
+    whatsappMessage: "Hi Cae! I'd like to talk about a project with Salt Frame Visuals.",
     items: [
       {
         title: "Sports photography",

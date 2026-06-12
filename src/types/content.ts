@@ -57,6 +57,8 @@ export interface SiteContent {
     email: string;
     instagram: string;
     instagramUrl: string;
+    whatsapp: string;
+    whatsappUrl: string;
   };
 }
 

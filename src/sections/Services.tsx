@@ -1,12 +1,17 @@
 "use client";
 
+import { MessageCircle } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { ButtonLink } from "@/components/ui/Button";
 import { Reveal } from "@/components/Reveal";
+import { site } from "@/content/site";
 import { useLang } from "@/i18n/LanguageProvider";
 
 export function Services() {
   const { t } = useLang();
+  const whatsappCta = `${site.contact.whatsappUrl}?text=${encodeURIComponent(
+    t.services.whatsappMessage,
+  )}`;
 
   return (
     <section id="servicios" className="bg-sf-black py-[clamp(4rem,10vw,8rem)] text-sf-white">
@@ -37,7 +42,13 @@ export function Services() {
         </div>
 
         <Reveal className="mt-12 flex justify-center md:mt-16">
-          <ButtonLink href="#contacto" variant="primary">
+          <ButtonLink
+            href={whatsappCta}
+            variant="primary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <MessageCircle className="h-5 w-5" strokeWidth={2} />
             {t.services.cta}
           </ButtonLink>
         </Reveal>

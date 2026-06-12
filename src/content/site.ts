@@ -25,5 +25,7 @@ export const site: SiteContent = {
     email: "info@saltframevisuals.com",
     instagram: "@saltframevisuals",
     instagramUrl: "https://instagram.com/saltframevisuals",
+    whatsapp: "+34 662 083 809",
+    whatsappUrl: "https://wa.me/34662083809",
   },
 };

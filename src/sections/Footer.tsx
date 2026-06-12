@@ -1,6 +1,6 @@
 "use client";
 
-import { Instagram, Mail } from "lucide-react";
+import { Instagram, Mail, MessageCircle } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { site } from "@/content/site";
 import { useLang } from "@/i18n/LanguageProvider";
@@ -31,6 +31,15 @@ export function Footer() {
             >
               <Mail className="h-5 w-5" strokeWidth={2} />
               {site.contact.email}
+            </a>
+            <a
+              href={site.contact.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-3 text-lg text-sf-white transition-colors hover:text-sf-red"
+            >
+              <MessageCircle className="h-5 w-5" strokeWidth={2} />
+              {site.contact.whatsapp}
             </a>
             <a
               href={site.contact.instagramUrl}
