@@ -16,6 +16,7 @@ export const Media: CollectionConfig = {
     group: "Biblioteca",
     description: "Todas tus fotos y videos. Subí material acá para usarlo en las publicaciones.",
     defaultColumns: ["filename", "alt", "mimeType"],
+    hideAPIURL: true,
   },
   access: {
     read: () => true, // medios públicos (se muestran en la web)

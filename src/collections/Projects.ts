@@ -17,6 +17,12 @@ export const Projects: CollectionConfig = {
     listSearchableFields: ["title", "client"],
     pagination: { defaultLimit: 25 },
     description: "Cada publicación del portfolio: portada, fotos y/o video.",
+    hideAPIURL: true,
+    components: {
+      views: {
+        list: { Component: "/admin/views/ProjectsList#ProjectsList" },
+      },
+    },
   },
   versions: { drafts: true }, // borrador + publicado
   access: {

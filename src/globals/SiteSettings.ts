@@ -12,6 +12,7 @@ export const SiteSettings: GlobalConfig = {
   admin: {
     group: "Sitio",
     description: "Los textos de la web: inicio, “Sobre mí”, servicios y contacto. Editá cada idioma con el selector ES/EN.",
+    hideAPIURL: true,
   },
   access: { read: () => true, update: authenticated },
   fields: [

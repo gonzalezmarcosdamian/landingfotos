@@ -12,6 +12,7 @@ export const Categories: CollectionConfig = {
     group: "Portfolio",
     defaultColumns: ["name", "slug", "order"],
     description: "Las secciones del portfolio (Deporte, Surf, Gastronomía, etc.).",
+    hideAPIURL: true,
   },
   access: {
     read: () => true,
