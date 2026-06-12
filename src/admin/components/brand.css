@@ -1,7 +1,7 @@
 /* ────────────────────────────────────────────────────────────────────────
-   Salt Frame Visuals — estilos de marca del backoffice
-   Mobile-first. Sólo agrega estilos propios (sfv-*) + un acento de marca
-   sutil; no reescribe los componentes internos de Payload.
+   Salt Frame Visuals — backoffice para fotógrafo (mobile-first)
+   Dashboard visual de publicaciones + branding. Sólo estilos propios (sfv-*)
+   + un acento de marca; no reescribe los componentes internos de Payload.
    ──────────────────────────────────────────────────────────────────────── */
 
 :root {
@@ -40,105 +40,241 @@
   max-width: 120px;
 }
 
-/* ── Panel de bienvenida ────────────────────────────────────────────────── */
-.sfv-welcome {
-  margin: 0 0 1.5rem;
+/* ── Dashboard ──────────────────────────────────────────────────────────── */
+.sfv-dash {
+  max-width: 1100px;
 }
-.sfv-welcome__head h1 {
-  font-size: 1.4rem;
-  margin: 0 0 0.35rem;
-  line-height: 1.2;
+.sfv-dash__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
 }
-.sfv-welcome__head p {
-  margin: 0 0 1.25rem;
+.sfv-dash__title {
+  font-size: 1.5rem;
+  margin: 0 0 0.2rem;
+  line-height: 1.15;
+}
+.sfv-dash__sub {
+  margin: 0;
   color: var(--theme-elevation-600, #6b6b6b);
-  max-width: 60ch;
+  font-size: 0.92rem;
 }
 
-.sfv-welcome__cards {
+/* Botón primario de marca */
+.sfv-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.7rem 1.1rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.sfv-btn--primary {
+  background: var(--sfv-red);
+  color: #fff;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.sfv-btn--primary:hover {
+  background: var(--sfv-red-hover);
+  transform: translateY(-1px);
+}
+
+/* ── Grilla de publicaciones ────────────────────────────────────────────── */
+.sfv-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(2, 1fr);
   gap: 0.85rem;
 }
-@media (min-width: 700px) {
-  .sfv-welcome__cards {
+@media (min-width: 600px) {
+  .sfv-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+@media (min-width: 900px) {
+  .sfv-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
 
-.sfv-card {
+.sfv-pub {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
-  padding: 1.1rem 1.15rem;
   border-radius: 14px;
+  overflow: hidden;
   border: 1px solid var(--theme-elevation-150, #e4e4e4);
   background: var(--theme-elevation-50, #fafafa);
   text-decoration: none;
   color: inherit;
-  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
-  min-height: 110px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
 }
-.sfv-card:hover {
-  transform: translateY(-2px);
+.sfv-pub:hover {
+  transform: translateY(-3px);
   border-color: var(--sfv-red);
-  box-shadow: 0 8px 24px rgba(217, 26, 42, 0.12);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.14);
 }
-.sfv-card__emoji {
-  font-size: 1.6rem;
-  line-height: 1;
+.sfv-pub__img {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  background: var(--theme-elevation-100, #efefef);
+  overflow: hidden;
 }
-.sfv-card__title {
+.sfv-pub__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.sfv-pub__noimg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--theme-elevation-500, #999);
+  font-size: 0.85rem;
+}
+.sfv-pub__type {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #fff;
+  background: rgba(10, 10, 10, 0.72);
+  backdrop-filter: blur(2px);
+}
+.sfv-pub__star {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--sfv-red);
+  color: #fff;
+  font-size: 0.82rem;
+}
+.sfv-pub__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.6rem 0.7rem 0.75rem;
+}
+.sfv-pub__title {
   font-weight: 700;
-  font-size: 1.02rem;
+  font-size: 0.92rem;
+  line-height: 1.2;
 }
-.sfv-card__desc {
-  font-size: 0.86rem;
+.sfv-pub__cat {
+  font-size: 0.78rem;
   color: var(--theme-elevation-600, #6b6b6b);
 }
 
-/* ── Guía de tareas ─────────────────────────────────────────────────────── */
-.sfv-guide {
-  margin-top: 1.75rem;
-  padding: 1.25rem 1.35rem;
-  border-radius: 14px;
+/* Tarjeta “nueva publicación” */
+.sfv-pub--new {
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 180px;
+  border-style: dashed;
+  border-width: 2px;
+  background: transparent;
+  font-weight: 600;
+  color: var(--theme-elevation-700, #555);
+  text-align: center;
+  padding: 1rem;
+}
+.sfv-pub--new:hover {
+  color: var(--sfv-red);
+}
+.sfv-pub__plus {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+/* ── Accesos secundarios ────────────────────────────────────────────────── */
+.sfv-dash__secondary {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+@media (min-width: 600px) {
+  .sfv-dash__secondary {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.sfv-tile {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
   border: 1px solid var(--theme-elevation-150, #e4e4e4);
   background: var(--theme-elevation-0, #fff);
+  text-decoration: none;
+  color: inherit;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: border-color 0.15s ease;
 }
-.sfv-guide h2 {
-  font-size: 1.08rem;
-  margin: 0 0 0.75rem;
+.sfv-tile:hover {
+  border-color: var(--sfv-red);
 }
-.sfv-guide__list {
-  margin: 0;
-  padding-left: 1.2rem;
-  display: grid;
-  gap: 0.6rem;
+.sfv-tile span {
+  font-size: 1.2rem;
 }
-.sfv-guide__list li {
-  font-size: 0.92rem;
-  line-height: 1.5;
+
+/* ── Ayuda colapsable ───────────────────────────────────────────────────── */
+.sfv-help {
+  margin-top: 1.75rem;
+  padding: 0.9rem 1.1rem;
+  border-radius: 12px;
+  border: 1px solid var(--theme-elevation-150, #e4e4e4);
+  background: var(--theme-elevation-50, #fafafa);
 }
-.sfv-guide__list li::marker {
-  color: var(--sfv-red);
+.sfv-help summary {
+  cursor: pointer;
   font-weight: 700;
+  font-size: 0.92rem;
 }
-.sfv-guide__list em {
+.sfv-help ul {
+  margin: 0.75rem 0 0.5rem;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.45rem;
+}
+.sfv-help li {
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+.sfv-help li::marker {
+  color: var(--sfv-red);
+}
+.sfv-help em {
   font-style: normal;
   font-weight: 600;
-  color: var(--theme-elevation-800, #1a1a1a);
   background: var(--theme-elevation-100, #f0f0f0);
   padding: 0.05em 0.35em;
   border-radius: 5px;
 }
-.sfv-guide__note {
-  margin: 1rem 0 0;
-  font-size: 0.86rem;
+.sfv-help p {
+  margin: 0.5rem 0 0;
+  font-size: 0.82rem;
   color: var(--theme-elevation-600, #6b6b6b);
-}
-.sfv-guide__note a {
-  color: var(--sfv-red);
-  font-weight: 600;
 }
 
 /* ── Acento de marca (sutil, no invasivo) ───────────────────────────────── */
