@@ -40,7 +40,7 @@ export function Nav() {
             href="#home"
             className="font-display text-base font-extrabold uppercase tracking-tight text-sf-white"
           >
-            Salt Frame<span className="text-sf-red">.</span>
+            Salt Frame Visuals<span className="text-sf-red">.</span>
           </a>
         </Magnetic>
 
