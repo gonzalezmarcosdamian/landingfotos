@@ -1,7 +1,8 @@
 "use client";
 
-import { Instagram, Mail, MessageCircle } from "lucide-react";
+import { Instagram, Mail } from "lucide-react";
 import { Container } from "@/components/ui/Container";
+import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { site } from "@/content/site";
 import { useLang } from "@/i18n/LanguageProvider";
 
@@ -24,13 +25,13 @@ export function Footer() {
             <p className="mt-3 max-w-md text-sf-gray-300">{t.footer.blurb}</p>
           </div>
 
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 md:items-start">
             <a
               href={`mailto:${site.contact.email}`}
               className="group flex items-center gap-3 text-lg text-sf-white transition-colors hover:text-sf-red"
             >
-              <Mail className="h-5 w-5" strokeWidth={2} />
-              {site.contact.email}
+              <Mail className="h-5 w-5 shrink-0" strokeWidth={2} />
+              <span className="break-all">{site.contact.email}</span>
             </a>
             <a
               href={site.contact.whatsappUrl}
@@ -38,8 +39,8 @@ export function Footer() {
               rel="noopener noreferrer"
               className="group flex items-center gap-3 text-lg text-sf-white transition-colors hover:text-sf-red"
             >
-              <MessageCircle className="h-5 w-5" strokeWidth={2} />
-              {site.contact.whatsapp}
+              <WhatsAppIcon className="h-5 w-5 shrink-0" />
+              <span>{site.contact.whatsapp}</span>
             </a>
             <a
               href={site.contact.instagramUrl}
@@ -47,8 +48,8 @@ export function Footer() {
               rel="noopener noreferrer"
               className="group flex items-center gap-3 text-lg text-sf-white transition-colors hover:text-sf-red"
             >
-              <Instagram className="h-5 w-5" strokeWidth={2} />
-              {site.contact.instagram}
+              <Instagram className="h-5 w-5 shrink-0" strokeWidth={2} />
+              <span>{site.contact.instagram}</span>
             </a>
           </div>
         </div>

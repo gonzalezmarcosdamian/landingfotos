@@ -1,7 +1,7 @@
 "use client";
 
-import { MessageCircle } from "lucide-react";
 import { Container } from "@/components/ui/Container";
+import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { ButtonLink } from "@/components/ui/Button";
 import { Reveal } from "@/components/Reveal";
 import { site } from "@/content/site";
@@ -48,7 +48,7 @@ export function Services() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <MessageCircle className="h-5 w-5" strokeWidth={2} />
+            <WhatsAppIcon className="h-5 w-5 shrink-0" />
             {t.services.cta}
           </ButtonLink>
         </Reveal>
