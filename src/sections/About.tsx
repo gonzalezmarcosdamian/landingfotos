@@ -24,7 +24,7 @@ export function About() {
             <ParallaxImage
               src="/about/cae.jpg"
               alt="Cae, Salt Frame Visuals"
-              className="aspect-[4/5] w-full max-w-sm rounded-[2px]"
+              className="aspect-[4/5] w-full rounded-[2px]"
               sizes="(max-width: 768px) 100vw, 30vw"
               intensity={6}
             />
