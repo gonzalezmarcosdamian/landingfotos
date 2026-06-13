@@ -24,7 +24,7 @@ export const Projects: CollectionConfig = {
       },
     },
   },
-  versions: { drafts: true }, // borrador + publicado
+  // Sin borradores: un solo botón “Guardar” y la publicación queda online.
   access: {
     read: () => true,
     create: authenticated,

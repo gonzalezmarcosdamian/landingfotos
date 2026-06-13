@@ -4,8 +4,8 @@ import { getPayload } from "payload";
 import config from "@payload-config";
 
 /**
- * Grilla visual de publicaciones (tarjetas con portada). Compartida por el
- * dashboard y por la vista de lista de la colección Publicaciones.
+ * Grilla visual de publicaciones (tarjetas estilo portfolio: título sobre la
+ * portada). Compartida por el dashboard y la vista de lista de Publicaciones.
  */
 
 interface MediaLike {
@@ -50,6 +50,19 @@ export async function PublicationsGrid() {
   });
   const projects = docs as ProjectDoc[];
 
+  if (projects.length === 0) {
+    return (
+      <div className="sfv-empty">
+        <span className="sfv-empty__emoji">📷</span>
+        <h2>Todavía no tenés publicaciones</h2>
+        <p>Creá la primera: subí una portada, ponele título y categoría, y guardá.</p>
+        <Link className="sfv-btn sfv-btn--primary" href="/admin/collections/projects/create">
+          + Crear mi primera publicación
+        </Link>
+      </div>
+    );
+  }
+
   return (
     <div className="sfv-grid">
       {projects.map((p) => {
@@ -65,10 +78,10 @@ export async function PublicationsGrid() {
               )}
               <span className="sfv-pub__type">{p.type === "video" ? "🎬 Video" : "📷 Foto"}</span>
               {p.featured ? <span className="sfv-pub__star" title="Se muestra en el inicio">★</span> : null}
-            </div>
-            <div className="sfv-pub__body">
-              <span className="sfv-pub__title">{p.title}</span>
-              <span className="sfv-pub__cat">{categoryName(p)}</span>
+              <div className="sfv-pub__overlay">
+                <span className="sfv-pub__title">{p.title}</span>
+                {categoryName(p) ? <span className="sfv-pub__cat">{categoryName(p)}</span> : null}
+              </div>
             </div>
           </Link>
         );
