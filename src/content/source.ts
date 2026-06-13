@@ -4,15 +4,9 @@ import { dictionaries, type Dict, type Lang } from "@/i18n/dictionaries";
 import { getFeaturedProjects } from "@/content/projects";
 import { site } from "@/content/site";
 import type { Project } from "@/types/content";
+import type { SiteContact } from "@/content/contact";
 
-/** Datos de contacto (no localizados) — editables desde el CMS. */
-export interface SiteContact {
-  email: string;
-  instagram: string;
-  instagramUrl: string;
-  whatsapp: string;
-  whatsappUrl: string;
-}
+export type { SiteContact };
 
 /**
  * Capa de abstracción de contenido (CMS-ready).

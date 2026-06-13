@@ -2,7 +2,8 @@ import "server-only";
 import { dictionaries, type Dict, type Lang, LANGS } from "@/i18n/dictionaries";
 import type { Category, MediaType, Project } from "@/types/content";
 import { site } from "@/content/site";
-import type { SiteContact, SiteContent } from "@/content/source";
+import { buildContact } from "@/content/contact";
+import type { SiteContent } from "@/content/source";
 
 /**
  * Fuente de contenido por HTTP contra el backoffice Payload (Railway).
@@ -153,18 +154,6 @@ function toProject(p: CmsProject): Project | null {
   };
 }
 
-/** Arma los datos de contacto desde el CMS; cae al estático en lo que falte. */
-function buildContact(s: CmsSettings): SiteContact {
-  const digits = (s.whatsapp ?? "").replace(/[^0-9]/g, "");
-  return {
-    email: s.contactEmail?.trim() || site.contact.email,
-    instagram: s.instagram?.trim() || site.contact.instagram,
-    instagramUrl: s.instagramUrl?.trim() || site.contact.instagramUrl,
-    whatsapp: s.whatsapp?.trim() || site.contact.whatsapp,
-    whatsappUrl: digits ? `https://wa.me/${digits}` : site.contact.whatsappUrl,
-  };
-}
-
 /**
  * Devuelve el contenido del sitio desde el CMS, o `null` si no hay CMS configurado
  * o la consulta falla (para que la capa superior caiga al estático).
@@ -211,7 +200,7 @@ export async function getCmsContent(): Promise<SiteContent | null> {
 
     if (projects.length === 0) return null; // sin contenido útil -> fallback
 
-    return { dictionaries: dicts, projects, contact: buildContact(settings.es) };
+    return { dictionaries: dicts, projects, contact: buildContact(settings.es, site.contact) };
   } catch {
     return null;
   }
