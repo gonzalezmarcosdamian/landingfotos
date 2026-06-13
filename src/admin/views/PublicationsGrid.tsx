@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { getPayload } from "payload";
 import config from "@payload-config";
+import { cloudinaryThumb } from "@/lib/cloudinary";
 
 /**
  * Grilla visual de publicaciones (tarjetas estilo portfolio: título sobre la
@@ -23,16 +24,8 @@ interface ProjectDoc {
   category?: CategoryLike | string | null;
 }
 
-/** Miniatura optimizada de Cloudinary (recorte vertical). */
-function thumb(url?: string | null): string | null {
-  if (!url) return null;
-  if (url.includes("/upload/")) {
-    return url.replace("/upload/", "/upload/c_fill,g_auto,w_500,h_640,q_auto,f_auto/");
-  }
-  return url;
-}
 function coverUrl(p: ProjectDoc): string | null {
-  if (p.cover && typeof p.cover === "object") return thumb(p.cover.url);
+  if (p.cover && typeof p.cover === "object") return cloudinaryThumb(p.cover.url);
   return null;
 }
 function categoryName(p: ProjectDoc): string {

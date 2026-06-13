@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useField, useFormFields } from "@payloadcms/ui";
+import { cloudinaryThumb } from "@/lib/cloudinary";
 
 /**
  * Selector de portada: muestra las fotos de la galería como miniaturas y, al
@@ -11,18 +12,13 @@ import { useField, useFormFields } from "@payloadcms/ui";
 
 type Id = string | number;
 
-function thumb(url?: string | null): string | null {
-  if (!url) return null;
-  if (url.includes("/upload/")) {
-    return url.replace("/upload/", "/upload/c_fill,g_auto,w_200,h_250,q_auto,f_auto/");
-  }
-  return url;
-}
+const thumb = (url?: string | null) => cloudinaryThumb(url, { w: 200, h: 250 });
 
 export function CoverFromGallery() {
   const { value: cover, setValue: setCover } = useField<Id>({ path: "cover" });
   const galleryValue = useFormFields(([fields]) => fields?.gallery?.value) as Id[] | undefined;
   const [thumbs, setThumbs] = useState<Record<string, string>>({});
+  const [loading, setLoading] = useState(false);
 
   const ids: Id[] = Array.isArray(galleryValue) ? galleryValue : [];
   const key = ids.join(",");
@@ -33,6 +29,7 @@ export function CoverFromGallery() {
       return;
     }
     let cancelled = false;
+    setLoading(true);
     fetch(`/api/media?where[id][in]=${ids.join(",")}&limit=200&depth=0`, {
       credentials: "include",
     })
@@ -46,7 +43,10 @@ export function CoverFromGallery() {
         }
         setThumbs(map);
       })
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
     return () => {
       cancelled = true;
     };
@@ -72,8 +72,10 @@ export function CoverFromGallery() {
             <button
               type="button"
               key={String(id)}
-              className={`sfv-coverpick__item${isCover ? " is-cover" : ""}`}
+              className={`sfv-coverpick__item${isCover ? " is-cover" : ""}${!url && loading ? " is-loading" : ""}`}
               onClick={() => setCover(id)}
+              aria-pressed={isCover}
+              aria-label={isCover ? "Portada actual" : "Usar esta foto como portada"}
               title={isCover ? "Es la portada" : "Usar como portada"}
             >
               {url ? (

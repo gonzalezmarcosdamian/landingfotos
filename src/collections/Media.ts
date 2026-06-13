@@ -17,6 +17,11 @@ export const Media: CollectionConfig = {
     description: "Todas tus fotos y videos. Subí material acá para usarlo en las publicaciones.",
     defaultColumns: ["filename", "alt", "mimeType"],
     hideAPIURL: true,
+    components: {
+      views: {
+        list: { Component: "/admin/views/MediaList#MediaList" },
+      },
+    },
   },
   access: {
     read: () => true, // medios públicos (se muestran en la web)

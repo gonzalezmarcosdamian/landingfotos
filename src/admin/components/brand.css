@@ -386,6 +386,36 @@
   text-align: center;
 }
 
+/* ── Grilla de la Biblioteca (miniaturas más chicas) ────────────────────── */
+.sfv-grid--media {
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+}
+@media (min-width: 600px) {
+  .sfv-grid--media {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+}
+
+/* ── Skeleton de carga del selector de portada ──────────────────────────── */
+.sfv-coverpick__item.is-loading {
+  background: var(--theme-elevation-100, #efefef);
+  animation: sfvPulse 1.1s ease-in-out infinite;
+}
+@keyframes sfvPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+/* ── Foco accesible (teclado) ───────────────────────────────────────────── */
+.sfv-pub:focus-visible,
+.sfv-tile:focus-visible,
+.sfv-btn:focus-visible,
+.sfv-coverpick__item:focus-visible,
+.sfv-help summary:focus-visible {
+  outline: 3px solid var(--sfv-red);
+  outline-offset: 2px;
+}
+
 /* ── Acento de marca en botones nativos de Payload ──────────────────────── */
 .btn--style-primary:not(:disabled) {
   background-color: var(--sfv-red);
