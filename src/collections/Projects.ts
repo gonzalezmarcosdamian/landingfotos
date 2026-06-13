@@ -32,94 +32,89 @@ export const Projects: CollectionConfig = {
     delete: authenticated,
   },
   fields: [
+    // ── Portada y medios (todo en una sola ficha, sin pestañas) ──────────
     {
-      type: "tabs",
-      tabs: [
+      name: "cover",
+      type: "upload",
+      relationTo: "media",
+      required: true,
+      label: "Portada",
+      admin: {
+        description: "📸 Foto principal — la que se ve en el portfolio. Vertical (4:5) recomendado.",
+      },
+    },
+    {
+      // Selector visual: tocá una foto de la galería para usarla de portada.
+      name: "coverPicker",
+      type: "ui",
+      admin: {
+        components: { Field: "/admin/components/CoverFromGallery#CoverFromGallery" },
+      },
+    },
+    {
+      name: "gallery",
+      type: "upload",
+      relationTo: "media",
+      hasMany: true,
+      label: "Galería de fotos",
+      admin: {
+        description:
+          "Arrastrá un archivo a la zona o tocá “Crear nuevo” para subir. Arrastrá las miniaturas para ordenarlas.",
+      },
+    },
+    {
+      name: "video",
+      type: "upload",
+      relationTo: "media",
+      label: "Video",
+      admin: {
+        description: "Opcional. Si la publicación es un video, subí el archivo .mp4 acá.",
+      },
+    },
+    // ── Información ──────────────────────────────────────────────────────
+    {
+      type: "row",
+      fields: [
+        { name: "title", type: "text", required: true, label: "Título", admin: { width: "70%" } },
         {
-          label: "Portada y medios",
-          description: "La portada es la foto principal que se ve en la grilla del portfolio.",
-          fields: [
-            {
-              name: "cover",
-              type: "upload",
-              relationTo: "media",
-              required: true,
-              label: "Portada",
-              admin: {
-                description: "📸 Foto principal — la que se ve en el portfolio. Vertical (4:5) recomendado.",
-              },
-            },
-            {
-              name: "gallery",
-              type: "upload",
-              relationTo: "media",
-              hasMany: true,
-              label: "Galería de fotos",
-              admin: {
-                description: "Fotos que se ven al abrir la publicación. Arrastrá para ordenarlas.",
-              },
-            },
-            {
-              name: "video",
-              type: "upload",
-              relationTo: "media",
-              label: "Video",
-              admin: {
-                description: "Opcional. Si la publicación es un video, subí el archivo .mp4 acá.",
-              },
-            },
-          ],
-        },
-        {
-          label: "Información",
-          fields: [
-            {
-              type: "row",
-              fields: [
-                { name: "title", type: "text", required: true, label: "Título", admin: { width: "70%" } },
-                {
-                  name: "client",
-                  type: "text",
-                  label: "Cliente",
-                  admin: { width: "30%", description: "Opcional." },
-                },
-              ],
-            },
-            {
-              type: "row",
-              fields: [
-                {
-                  name: "category",
-                  type: "relationship",
-                  relationTo: "categories",
-                  required: true,
-                  label: "Categoría",
-                  admin: { width: "50%" },
-                },
-                {
-                  name: "type",
-                  type: "select",
-                  required: true,
-                  defaultValue: "photo",
-                  label: "Tipo",
-                  options: [
-                    { label: "Foto", value: "photo" },
-                    { label: "Video", value: "video" },
-                  ],
-                  admin: { width: "50%" },
-                },
-              ],
-            },
-            {
-              name: "summary",
-              type: "text",
-              localized: true,
-              label: "Resumen",
-              admin: { description: "Frase corta que describe la publicación (se traduce por idioma)." },
-            },
-          ],
+          name: "client",
+          type: "text",
+          label: "Cliente",
+          admin: { width: "30%", description: "Opcional." },
         },
       ],
+    },
+    {
+      type: "row",
+      fields: [
+        {
+          name: "category",
+          type: "relationship",
+          relationTo: "categories",
+          required: true,
+          label: "Categoría",
+          admin: { width: "50%" },
+        },
+        {
+          name: "type",
+          type: "select",
+          required: true,
+          defaultValue: "photo",
+          label: "Tipo",
+          options: [
+            { label: "Foto", value: "photo" },
+            { label: "Video", value: "video" },
+          ],
+          admin: { width: "50%" },
+        },
+      ],
+    },
+    {
+      name: "summary",
+      type: "text",
+      localized: true,
+      label: "Resumen",
+      admin: { description: "Frase corta que describe la publicación (se traduce por idioma)." },
     },
     {
       name: "slug",

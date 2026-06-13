@@ -4,6 +4,7 @@ import { Icon as Icon_sfv } from '@/admin/components/Icon'
 import { BrandProvider as BrandProvider_sfv } from '@/admin/components/BrandProvider'
 import { Dashboard as Dashboard_sfv } from '@/admin/views/Dashboard'
 import { ProjectsList as ProjectsList_sfv } from '@/admin/views/ProjectsList'
+import { CoverFromGallery as CoverFromGallery_sfv } from '@/admin/components/CoverFromGallery'
 
 /** @type import('payload').ImportMap */
 export const importMap = {
@@ -13,4 +14,5 @@ export const importMap = {
   "/admin/components/BrandProvider#BrandProvider": BrandProvider_sfv,
   "/admin/views/Dashboard#Dashboard": Dashboard_sfv,
   "/admin/views/ProjectsList#ProjectsList": ProjectsList_sfv,
+  "/admin/components/CoverFromGallery#CoverFromGallery": CoverFromGallery_sfv,
 }

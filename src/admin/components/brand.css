@@ -325,6 +325,67 @@
   color: var(--theme-elevation-600, #6b6b6b);
 }
 
+/* ── Selector de portada (tocar una foto de la galería) ─────────────────── */
+.sfv-coverpick {
+  margin: 0.5rem 0 1.25rem;
+}
+.sfv-coverpick__empty {
+  margin: 0.25rem 0 1.25rem;
+  font-size: 0.85rem;
+  color: var(--theme-elevation-600, #6b6b6b);
+}
+.sfv-coverpick__label {
+  margin: 0 0 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--theme-elevation-700, #555);
+}
+.sfv-coverpick__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(78px, 1fr));
+  gap: 0.5rem;
+}
+.sfv-coverpick__item {
+  position: relative;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  cursor: pointer;
+  background: var(--theme-elevation-100, #efefef);
+  transition: border-color 0.12s ease, transform 0.12s ease;
+}
+.sfv-coverpick__item:hover {
+  border-color: var(--sfv-red);
+  transform: translateY(-2px);
+}
+.sfv-coverpick__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.sfv-coverpick__item.is-cover {
+  border-color: var(--sfv-red);
+}
+.sfv-coverpick__ph {
+  position: absolute;
+  inset: 0;
+}
+.sfv-coverpick__badge {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.18rem 0.3rem;
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--sfv-red);
+  text-align: center;
+}
+
 /* ── Acento de marca en botones nativos de Payload ──────────────────────── */
 .btn--style-primary:not(:disabled) {
   background-color: var(--sfv-red);

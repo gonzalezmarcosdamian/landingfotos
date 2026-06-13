@@ -5,6 +5,7 @@ import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { sqliteAdapter } from "@payloadcms/db-sqlite";
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import { cloudinaryStorage } from "payload-storage-cloudinary";
+import { es } from "@payloadcms/translations/languages/es";
 import sharp from "sharp";
 
 import { Users } from "./src/collections/Users";
@@ -43,6 +44,11 @@ export default buildConfig({
     },
   },
   editor: lexicalEditor(),
+  // Panel en español (botones, etiquetas y textos del sistema).
+  i18n: {
+    supportedLanguages: { es },
+    fallbackLanguage: "es",
+  },
   // Orden de navegación pensado para el fotógrafo: portfolio primero.
   collections: [Projects, Categories, Media, Users],
   globals: [SiteSettings],
