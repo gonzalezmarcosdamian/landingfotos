@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@400;500;600&display=swap");
+
 /* ────────────────────────────────────────────────────────────────────────
    Salt Frame Visuals — backoffice para fotógrafo (mobile-first)
    Dashboard + lista visual de publicaciones (tarjetas estilo portfolio).
@@ -155,7 +157,7 @@
 
 /* ── Encabezado del dashboard / lista ───────────────────────────────────── */
 .sfv-dash {
-  max-width: 1040px;
+  max-width: 880px;
   margin-left: auto;
   margin-right: auto;
   padding: 1.5rem clamp(1rem, 4vw, 2rem) 2.5rem;
@@ -221,7 +223,7 @@
 
 /* ── Centrado y ancho máximo del contenido (todas las vistas, responsive) ─ */
 .gutter {
-  max-width: 1040px;
+  max-width: 880px;
   margin-left: auto !important;
   margin-right: auto !important;
 }
@@ -632,4 +634,94 @@
 .btn--style-primary:not(:disabled):hover {
   background-color: var(--sfv-red-hover);
   border-color: var(--sfv-red-hover);
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   POLISH — tipografía de marca, header, tablas y formularios
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* Tipografía: Poppins de base, Montserrat para títulos. */
+body,
+.template-default,
+.field-type input,
+.field-type textarea,
+.btn {
+  font-family: "Poppins", system-ui, -apple-system, sans-serif;
+}
+h1, h2, h3, h4,
+.sfv-dash__title, .sfv-intro__title, .sfvnav__brand,
+.doc-header__title, .list-header__title, .render-title {
+  font-family: "Montserrat", system-ui, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+/* Header superior: más limpio, con separación y acento de marca. */
+.app-header {
+  border-bottom: 1px solid var(--theme-elevation-100, #eee);
+  background: var(--theme-elevation-0, #fff);
+}
+.app-header__content {
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+}
+.step-nav a,
+.step-nav {
+  font-size: 0.86rem;
+}
+.step-nav a:hover {
+  color: var(--sfv-red);
+}
+
+/* Tablas/listas nativas: filas más aireadas, encabezado sobrio, hover suave. */
+.table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.table thead th {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--theme-elevation-500, #888);
+  border-bottom: 1px solid var(--theme-elevation-150, #e4e4e4);
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+}
+.table tbody td {
+  padding-top: 0.85rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--theme-elevation-100, #f0f0f0);
+}
+.table tbody tr {
+  transition: background 0.12s ease;
+}
+.table tbody tr:hover {
+  background: var(--theme-elevation-50, #fafafa);
+}
+.table tbody a {
+  font-weight: 600;
+  color: var(--theme-elevation-800, #1a1a1a);
+}
+.table tbody a:hover {
+  color: var(--sfv-red);
+}
+
+/* Formularios: labels más claros, campos con más aire y foco de marca. */
+.field-type {
+  margin-bottom: 1.15rem;
+}
+.field-label,
+.render-fields .field-label {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--theme-elevation-700, #444);
+}
+.field-description {
+  color: var(--theme-elevation-500, #888);
+}
+/* Tabs del documento (Hero / Sobre mí / …): activo en rojo de marca. */
+.doc-tab--active .btn__content,
+.tabs-field__tab-button--active {
+  color: var(--sfv-red) !important;
+  border-bottom-color: var(--sfv-red) !important;
 }
