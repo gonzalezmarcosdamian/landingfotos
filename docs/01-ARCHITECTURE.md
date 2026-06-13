@@ -6,10 +6,31 @@
 
 - **Proyecto:** Landing page para Salt Frame Visuals (fotografía y video audiovisual para marcas)
 - **Dominio objetivo:** `saltframevisuals.com`
-- **Estado:** Definición de arquitectura (Fase 0)
-- **Última actualización:** 2026-06-08
+- **Estado:** En producción — **v1.0.0** (landing + backoffice en vivo)
+- **Última actualización:** 2026-06-13
 - **Owner técnico:** Equipo de desarrollo
 - **Cliente:** Cae (creativo, Salt Frame Visuals)
+
+---
+
+## 0. Topología de despliegue (producción actual)
+
+El sistema son **dos aplicaciones desplegables** que comparten **un solo repo** (cada una en su rama):
+
+| App | Rama | Stack | Hosting | Deploy | URL |
+|-----|------|-------|---------|--------|-----|
+| **Landing** | `main` | Next.js 15 + React 19 (sin Payload) | **Vercel** | `vercel deploy --prod` (auto en push a `main`) | `saltframevisuals.com` |
+| **Backoffice** | `backoffice` | Next.js + **Payload CMS 3** (admin + API) | **Railway** | `railway up --service backoffice --environment production` (NO git-connected) | `admin.saltframevisuals.com/admin` |
+
+**Flujo de contenido:** el backoffice (Payload, Postgres en Railway, schema `salt_frame`) expone el contenido por **REST** (`/api/...`). La landing lo consume por HTTP en `src/content/cms-source.ts`, **fusiona** con strings de UI estáticos y **cae a contenido estático** ante cualquier fallo (la web nunca rompe). Revalidación **ISR 60s**. Medios en **Cloudinary** (CDN); dominio y DNS en Hostinger (email preservado).
+
+**Reglas operativas:**
+- El backoffice se despliega **solo a Railway** con `railway up` desde la rama `backoffice`. **Nunca a Vercel** — `vercel.json` desactiva el build de esa rama (`git.deploymentEnabled`).
+- El esquema de Postgres se crea/actualiza corriendo `next dev` local apuntando a la DB de Railway (en prod Payload no hace `push`).
+- **Gate antes de cada deploy:** `npm run predeploy` (typecheck + tests + build) debe pasar en verde.
+- La rama `backoffice` reemplazó a la antigua `feat/backoffice-payload` (era un nombre de feature para algo permanente).
+
+> Deuda conocida: hay duplicación de código de landing dentro del backoffice (ambas en ramas del mismo repo). Migrar a monorepo (`apps/landing` + `apps/backoffice` + `packages/shared`) es la evolución natural si crece el equipo.
 
 ---
 
