@@ -9,7 +9,117 @@
   --sfv-black: #0a0a0a;
   --sfv-red: #d91a2a;
   --sfv-red-hover: #b3141f;
+  --sfv-nav-bg: #101012;
+  --sfv-radius: 10px;
 }
+
+/* ════════════════════════════════════════════════════════════════════════
+   REBRAND — navegación moderna (sidebar oscura) + pulido del chrome
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* Sidebar: fondo oscuro de marca (reusa el posicionamiento/slide de Payload). */
+.nav {
+  background: var(--sfv-nav-bg) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.07) !important;
+}
+.nav .nav__scroll {
+  display: flex;
+  flex-direction: column;
+  padding: 0 !important;
+}
+
+.sfvnav {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+  padding: 18px 14px 16px;
+  min-height: 100%;
+}
+.sfvnav__brand {
+  display: block;
+  padding: 4px 10px 14px;
+}
+.sfvnav__brand img {
+  height: 26px;
+  width: auto;
+  display: block;
+}
+.sfvnav__group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 14px;
+}
+.sfvnav__grouplabel {
+  padding: 4px 12px;
+  font-size: 0.66rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: rgba(255, 255, 255, 0.38);
+}
+.sfvnav__link {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 9px 12px;
+  border-radius: var(--sfv-radius);
+  color: rgba(255, 255, 255, 0.76);
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 500;
+  line-height: 1.1;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+.sfvnav__link svg {
+  flex: none;
+  opacity: 0.8;
+}
+.sfvnav__link:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+.sfvnav__link.is-active {
+  background: var(--sfv-red);
+  color: #fff;
+}
+.sfvnav__link.is-active svg {
+  opacity: 1;
+}
+.sfvnav__link:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+.sfvnav__footer {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.sfvnav__link--ghost {
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 500;
+}
+
+/* Chrome: bordes redondeados y foco de marca (pulido suave, no invasivo). */
+.btn {
+  border-radius: var(--sfv-radius) !important;
+}
+.field-type input,
+.field-type textarea,
+.field-type .rs__control,
+.field-type .input-wrapper input {
+  border-radius: var(--sfv-radius) !important;
+}
+.field-type input:focus,
+.field-type textarea:focus {
+  border-color: var(--sfv-red) !important;
+  box-shadow: 0 0 0 2px rgba(217, 26, 42, 0.18) !important;
+}
+
 
 /* ── Logo (login + nav) ─────────────────────────────────────────────────── */
 .sfv-logo {

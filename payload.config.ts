@@ -35,6 +35,7 @@ export default buildConfig({
         Logo: "/admin/components/Logo#Logo",
         Icon: "/admin/components/Icon#Icon",
       },
+      Nav: "/admin/components/Nav#Nav",
       providers: ["/admin/components/BrandProvider#BrandProvider"],
       views: {
         dashboard: {
