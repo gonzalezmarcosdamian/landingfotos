@@ -15,13 +15,11 @@ export const Media: CollectionConfig = {
   admin: {
     group: "Biblioteca",
     description: "Todas tus fotos y videos. Subí material acá para usarlo en las publicaciones.",
+    // Nota: NO usar vista de lista custom acá. La Biblioteca se usa también en el
+    // selector “Elegir existente” de la galería; la lista nativa de Payload trae
+    // los checkboxes para seleccionar VARIAS a la vez (multi-select).
     defaultColumns: ["filename", "alt", "mimeType"],
     hideAPIURL: true,
-    components: {
-      views: {
-        list: { Component: "/admin/views/MediaList#MediaList" },
-      },
-    },
   },
   access: {
     read: () => true, // medios públicos (se muestran en la web)

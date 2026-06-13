@@ -5,7 +5,6 @@ import { BrandProvider as BrandProvider_sfv } from '@/admin/components/BrandProv
 import { Dashboard as Dashboard_sfv } from '@/admin/views/Dashboard'
 import { ProjectsList as ProjectsList_sfv } from '@/admin/views/ProjectsList'
 import { CoverFromGallery as CoverFromGallery_sfv } from '@/admin/components/CoverFromGallery'
-import { MediaList as MediaList_sfv } from '@/admin/views/MediaList'
 import { Nav as Nav_sfv } from '@/admin/components/Nav'
 
 /** @type import('payload').ImportMap */
@@ -17,6 +16,5 @@ export const importMap = {
   "/admin/views/Dashboard#Dashboard": Dashboard_sfv,
   "/admin/views/ProjectsList#ProjectsList": ProjectsList_sfv,
   "/admin/components/CoverFromGallery#CoverFromGallery": CoverFromGallery_sfv,
-  "/admin/views/MediaList#MediaList": MediaList_sfv,
   "/admin/components/Nav#Nav": Nav_sfv,
 }

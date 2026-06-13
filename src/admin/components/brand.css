@@ -25,9 +25,17 @@
 .step-nav__home {
   display: none !important;
 }
-/* Botón de colapsar/abrir la barra: limpio y discreto (hover de marca). */
+/* Botón de colapsar/abrir la barra: discreto, sin recuadro blanco, no tapa el logo. */
+.template-default__nav-toggler {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.template-default__nav-toggler .hamburger {
+  background: transparent !important;
+}
 .template-default__nav-toggler .hamburger .icon .stroke {
-  stroke: var(--theme-elevation-400, #999);
+  stroke: rgba(255, 255, 255, 0.65);
 }
 .template-default__nav-toggler:hover .hamburger .icon .stroke {
   stroke: var(--sfv-red);
@@ -49,7 +57,8 @@
   flex: 1;
   flex-direction: column;
   gap: 2px;
-  padding: 18px 14px 16px;
+  /* padding-top deja lugar arriba para el botón de colapsar (no tapa el logo). */
+  padding: 56px 14px 16px;
   min-height: 100%;
 }
 .sfvnav__brand {
