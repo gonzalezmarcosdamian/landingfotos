@@ -1,6 +1,7 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Link from "next/link";
 import { PublicationsGrid } from "./PublicationsGrid";
+import { GridSkeleton } from "./GridSkeleton";
 
 const SITE_URL = "https://saltframevisuals.com";
 
@@ -26,7 +27,9 @@ export function ProjectsList() {
         </div>
       </div>
 
-      <PublicationsGrid />
+      <Suspense fallback={<GridSkeleton />}>
+        <PublicationsGrid />
+      </Suspense>
     </div>
   );
 }

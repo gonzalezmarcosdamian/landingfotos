@@ -32,15 +32,17 @@ export const Media: CollectionConfig = {
   upload: {
     disableLocalStorage: true,
     mimeTypes: ["image/*", "video/*"],
+    bulkUpload: true, // permite subir y crear varias a la vez
   },
   fields: [
     {
       name: "alt",
       type: "text",
-      required: true,
+      // Opcional: así se pueden subir VARIAS de una sin frenar en cada archivo.
+      // Si queda vacío, la web usa el título de la publicación como alt.
       localized: true,
-      label: "Descripción",
-      admin: { description: "Qué se ve en la imagen (ayuda al SEO y la accesibilidad)." },
+      label: "Descripción (opcional)",
+      admin: { description: "Qué se ve en la imagen (ayuda al SEO). Podés dejarlo vacío." },
     },
   ],
 };

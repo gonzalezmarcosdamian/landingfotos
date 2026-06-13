@@ -82,9 +82,9 @@ export function Nav() {
     <aside className={asideClass}>
       <div className="nav__scroll" ref={navRef}>
         <div className="sfvnav">
-          <Link href="/admin" className="sfvnav__brand" onClick={close} aria-label="Inicio">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo-white.png" alt="Salt Frame Visuals" />
+          <Link href="/admin" className="sfvnav__brand" onClick={close} aria-label="Salt Frame Visuals — Inicio">
+            <span className="sfvnav__brand-main">SALT FRAME</span>
+            <span className="sfvnav__brand-sub">VISUALS</span>
           </Link>
 
           <Link

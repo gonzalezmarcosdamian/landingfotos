@@ -1,8 +1,9 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Link from "next/link";
 import { getPayload } from "payload";
 import config from "@payload-config";
 import { PublicationsGrid } from "./PublicationsGrid";
+import { GridSkeleton } from "./GridSkeleton";
 import { GUIDE_INTRO, GUIDE_SECTIONS } from "@/admin/guide";
 
 const SITE_URL = "https://saltframevisuals.com";
@@ -62,7 +63,9 @@ export async function Dashboard() {
         </Link>
       </div>
 
-      <PublicationsGrid />
+      <Suspense fallback={<GridSkeleton />}>
+        <PublicationsGrid />
+      </Suspense>
     </div>
   );
 }

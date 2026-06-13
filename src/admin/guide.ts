@@ -28,10 +28,10 @@ export const GUIDE_SECTIONS: GuideSection[] = [
       "Cada trabajo de tu portfolio (una sesión, un cliente, una temporada). Es lo que se ve en tu web.",
     pasos: [
       "Tocá una publicación para abrirla, o “+ Nueva publicación” para crear una.",
-      "Elegí la portada: subí una foto o tocá una de la galería para usarla de portada.",
-      "Sumá fotos a la galería y/o un video.",
-      "Completá título, categoría y un resumen corto.",
-      "Tocá Guardar: en ~1 minuto aparece en tu web.",
+      "En la galería tocá “Crear nuevo” y seleccioná o soltá VARIAS fotos de una vez.",
+      "Arrastrá las miniaturas con el mouse para ordenarlas.",
+      "Elegí la portada: tocá una foto de la galería para usarla de portada.",
+      "Completá título, categoría y un resumen corto, y tocá Guardar (~1 min en tu web).",
     ],
   },
   {
@@ -41,9 +41,9 @@ export const GUIDE_SECTIONS: GuideSection[] = [
     objetivo:
       "Todas tus fotos y videos en un solo lugar. Lo que subís acá lo podés reutilizar en cualquier publicación.",
     pasos: [
-      "Tocá “+ Subir foto o video” y arrastrá el archivo o elegilo.",
-      "Escribí una descripción corta de la imagen (ayuda al SEO).",
-      "Guardá. Después usás ese archivo como portada o en la galería de una publicación.",
+      "Tocá “+ Subir foto o video”: podés seleccionar o soltar VARIAS a la vez.",
+      "La descripción es opcional (ayuda al SEO si la completás).",
+      "Guardá. Después usás esos archivos como portada o en la galería de una publicación.",
     ],
   },
   {
