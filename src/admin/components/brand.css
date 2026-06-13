@@ -19,11 +19,18 @@
    REBRAND — navegación moderna (sidebar oscura) + pulido del chrome
    ════════════════════════════════════════════════════════════════════════ */
 
-/* Quitar elementos feos del chrome: ícono/logo chico del header y la flecha de
-   colapsar la barra (el branding ya está en la sidebar). */
-.step-nav__home,
-.template-default__nav-toggler {
+/* Ocultar solo el logito chico del header (el branding ya está en la sidebar).
+   OJO: NO ocultar .template-default__nav-toggler — es el botón para colapsar /
+   volver a abrir la barra lateral. */
+.step-nav__home {
   display: none !important;
+}
+/* Botón de colapsar/abrir la barra: limpio y discreto (hover de marca). */
+.template-default__nav-toggler .hamburger .icon .stroke {
+  stroke: var(--theme-elevation-400, #999);
+}
+.template-default__nav-toggler:hover .hamburger .icon .stroke {
+  stroke: var(--sfv-red);
 }
 
 /* Sidebar: fondo oscuro de marca (reusa el posicionamiento/slide de Payload). */
