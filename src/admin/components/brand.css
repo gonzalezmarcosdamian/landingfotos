@@ -81,11 +81,13 @@
   color: #fff;
 }
 .sfvnav__link.is-active {
-  background: var(--sfv-red);
+  background: rgba(255, 255, 255, 0.09);
   color: #fff;
+  box-shadow: inset 3px 0 0 0 var(--sfv-red);
 }
 .sfvnav__link.is-active svg {
   opacity: 1;
+  color: var(--sfv-red);
 }
 .sfvnav__link:focus-visible {
   outline: 2px solid #fff;
@@ -153,7 +155,10 @@
 
 /* ── Encabezado del dashboard / lista ───────────────────────────────────── */
 .sfv-dash {
-  max-width: 1100px;
+  max-width: 1040px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1.5rem clamp(1rem, 4vw, 2rem) 2.5rem;
 }
 .sfv-dash__top {
   display: flex;
@@ -212,6 +217,13 @@
 .sfv-btn--ghost:hover {
   border-color: var(--sfv-red);
   color: var(--sfv-red);
+}
+
+/* ── Centrado y ancho máximo del contenido (todas las vistas, responsive) ─ */
+.gutter {
+  max-width: 1040px;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 /* ── Inicio: intro + guía de secciones ──────────────────────────────────── */

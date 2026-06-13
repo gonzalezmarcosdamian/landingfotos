@@ -36,7 +36,7 @@ export async function MediaList() {
   const media = docs as MediaDoc[];
 
   return (
-    <div className="sfv-dash" style={{ padding: "1.25rem" }}>
+    <div className="sfv-dash">
       <div className="sfv-dash__top">
         <div>
           <h1 className="sfv-dash__title">Biblioteca</h1>
