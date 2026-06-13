@@ -34,10 +34,15 @@ export const metadata: Metadata = {
   keywords: [
     "fotografía deportiva",
     "video comercial",
-    "surf",
+    "contenido para redes sociales",
+    "contenido para Instagram",
+    "fotografía de surf",
     "real estate",
     "gastronomía",
     "contenido para marcas",
+    "social media content",
+    "brand photography",
+    "videographer Australia",
     "Salt Frame Visuals",
   ],
   openGraph: {
@@ -48,15 +53,28 @@ export const metadata: Metadata = {
     title: "Salt Frame Visuals — Contenido audiovisual con actitud para marcas",
     description:
       "Fotografía deportiva y video comercial para marcas. Imágenes vibrantes, videos que transmiten.",
-    images: [{ url: "/hero/hero-poster-desktop.jpg", width: 1920, height: 1080 }],
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Salt Frame Visuals — contenido audiovisual con actitud para marcas",
+      },
+    ],
+    alternateLocale: ["en_US"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Salt Frame Visuals",
     description: "Contenido audiovisual con actitud para marcas.",
-    images: ["/hero/hero-poster-desktop.jpg"],
+    images: ["/og-image.jpg"],
   },
-  robots: { index: true, follow: true },
+  alternates: { canonical: "/" },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large" },
+  },
 };
 
 export const viewport: Viewport = {
