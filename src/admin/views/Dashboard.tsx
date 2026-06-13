@@ -3,12 +3,13 @@ import Link from "next/link";
 import { getPayload } from "payload";
 import config from "@payload-config";
 import { PublicationsGrid } from "./PublicationsGrid";
+import { GUIDE_INTRO, GUIDE_SECTIONS } from "@/admin/guide";
 
 const SITE_URL = "https://saltframevisuals.com";
 
 /**
- * Dashboard a medida para el fotógrafo. Reemplaza el panel por defecto de Payload:
- * saludo + grilla visual de publicaciones + accesos secundarios + ayuda.
+ * Inicio del backoffice. Lo primero que ve el fotógrafo: el objetivo del panel
+ * y una guía de cómo usar cada sección. Debajo, sus publicaciones.
  */
 export async function Dashboard() {
   const payload = await getPayload({ config });
@@ -17,49 +18,51 @@ export async function Dashboard() {
 
   return (
     <div className="sfv-dash">
-      <div className="sfv-dash__top">
+      <div className="sfv-intro">
+        <div className="sfv-intro__text">
+          <h1 className="sfv-intro__title">Hola 👋 Bienvenido a tu panel</h1>
+          <p className="sfv-intro__lead">{GUIDE_INTRO}</p>
+        </div>
+        <a className="sfv-btn sfv-btn--ghost" href={SITE_URL} target="_blank" rel="noreferrer">
+          👁️ Ver mi sitio
+        </a>
+      </div>
+
+      <div className="sfv-guidegrid">
+        {GUIDE_SECTIONS.map((s) => (
+          <section className="sfv-guidecard" key={s.title}>
+            <h2 className="sfv-guidecard__title">
+              <span aria-hidden>{s.emoji}</span> {s.title}
+            </h2>
+            <p className="sfv-guidecard__obj">{s.objetivo}</p>
+            <p className="sfv-guidecard__how">Cómo se usa:</p>
+            <ol className="sfv-guidecard__steps">
+              {s.pasos.map((p, i) => (
+                <li key={i}>{p}</li>
+              ))}
+            </ol>
+            <Link className="sfv-btn sfv-btn--primary sfv-guidecard__cta" href={s.href}>
+              Ir a {s.title}
+            </Link>
+          </section>
+        ))}
+      </div>
+
+      <div className="sfv-dash__top sfv-dash__top--pubs">
         <div>
-          <h1 className="sfv-dash__title">Mis publicaciones</h1>
+          <h2 className="sfv-dash__title">Tus publicaciones</h2>
           <p className="sfv-dash__sub">
             {count > 0
-              ? `Tenés ${count} ${count === 1 ? "publicación" : "publicaciones"}. Tocá una para editarla, cambiar la portada o agregar fotos.`
-              : "Tocá “Nueva publicación” para empezar."}
+              ? `Tenés ${count} ${count === 1 ? "publicación" : "publicaciones"}. Tocá una para editarla.`
+              : "Todavía no tenés publicaciones."}
           </p>
         </div>
-        <div className="sfv-dash__actions">
-          <a className="sfv-btn sfv-btn--ghost" href={SITE_URL} target="_blank" rel="noreferrer">
-            👁️ Ver mi sitio
-          </a>
-          <Link className="sfv-btn sfv-btn--primary" href="/admin/collections/projects/create">
-            + Nueva publicación
-          </Link>
-        </div>
+        <Link className="sfv-btn sfv-btn--primary" href="/admin/collections/projects/create">
+          + Nueva publicación
+        </Link>
       </div>
 
       <PublicationsGrid />
-
-      <div className="sfv-dash__secondary">
-        <Link className="sfv-tile" href="/admin/collections/media">
-          <span>🖼️</span> Biblioteca de fotos y videos
-        </Link>
-        <Link className="sfv-tile" href="/admin/globals/site-settings">
-          <span>✍️</span> Textos del sitio
-        </Link>
-        <Link className="sfv-tile" href="/admin/collections/categories">
-          <span>🏷️</span> Categorías
-        </Link>
-      </div>
-
-      <details className="sfv-help">
-        <summary>¿Necesitás ayuda? Tareas comunes</summary>
-        <ul>
-          <li><strong>Cambiar la portada:</strong> abrí la publicación → pestaña <em>Portada y medios</em> → elegí la foto en <em>Portada</em> → Guardar.</li>
-          <li><strong>Agregar fotos:</strong> misma pestaña → <em>Galería</em> → Agregar (podés arrastrarlas para ordenar) → Guardar.</li>
-          <li><strong>Sumar un video:</strong> <em>Portada y medios</em> → <em>Video</em> → subí el .mp4 → Guardar.</li>
-          <li><strong>Editar textos del sitio:</strong> <em>Textos del sitio</em> → elegí la pestaña → usá <em>ES/EN</em> arriba a la derecha → Guardar.</li>
-        </ul>
-        <p>Los cambios se ven en saltframevisuals.com en ~1 minuto.</p>
-      </details>
     </div>
   );
 }
