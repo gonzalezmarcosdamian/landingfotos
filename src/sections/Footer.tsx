@@ -7,7 +7,7 @@ import { site } from "@/content/site";
 import { useLang } from "@/i18n/LanguageProvider";
 
 export function Footer() {
-  const { t } = useLang();
+  const { t, contact } = useLang();
   const year = 2026;
 
   return (
@@ -27,14 +27,14 @@ export function Footer() {
 
           <div className="flex flex-col gap-4 md:items-start">
             <a
-              href={`mailto:${site.contact.email}`}
+              href={`mailto:${contact.email}`}
               className="group flex items-center gap-3 text-lg text-sf-white transition-colors hover:text-sf-red"
             >
               <Mail className="h-5 w-5 shrink-0" strokeWidth={2} />
-              <span className="break-all">{site.contact.email}</span>
+              <span className="break-all">{contact.email}</span>
             </a>
             <a
-              href={site.contact.whatsappUrl}
+              href={contact.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="group flex items-center gap-3 text-lg text-sf-white transition-colors hover:text-sf-red"
@@ -43,13 +43,13 @@ export function Footer() {
               <span>WhatsApp</span>
             </a>
             <a
-              href={site.contact.instagramUrl}
+              href={contact.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="group flex items-center gap-3 text-lg text-sf-white transition-colors hover:text-sf-red"
             >
               <Instagram className="h-5 w-5 shrink-0" strokeWidth={2} />
-              <span>{site.contact.instagram}</span>
+              <span>{contact.instagram}</span>
             </a>
           </div>
         </div>

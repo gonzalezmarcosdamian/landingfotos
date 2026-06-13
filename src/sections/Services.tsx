@@ -4,12 +4,11 @@ import { Container } from "@/components/ui/Container";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { ButtonLink } from "@/components/ui/Button";
 import { Reveal } from "@/components/Reveal";
-import { site } from "@/content/site";
 import { useLang } from "@/i18n/LanguageProvider";
 
 export function Services() {
-  const { t } = useLang();
-  const whatsappCta = `${site.contact.whatsappUrl}?text=${encodeURIComponent(
+  const { t, contact } = useLang();
+  const whatsappCta = `${contact.whatsappUrl}?text=${encodeURIComponent(
     t.services.whatsappMessage,
   )}`;
 

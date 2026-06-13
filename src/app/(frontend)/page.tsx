@@ -5,18 +5,18 @@ import { About } from "@/sections/About";
 import { Services } from "@/sections/Services";
 import { Footer } from "@/sections/Footer";
 import { site } from "@/content/site";
-import { getSiteContent } from "@/content/source";
+import { getSiteContent, type SiteContact } from "@/content/source";
 
 /** Datos estructurados JSON-LD para SEO local (ProfessionalService). */
-function StructuredData() {
+function StructuredData({ contact }: { contact: SiteContact }) {
   const json = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     name: site.brand,
     description: "Contenido audiovisual con actitud para marcas.",
-    email: site.contact.email,
+    email: contact.email,
     url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://saltframevisuals.com",
-    sameAs: [site.contact.instagramUrl],
+    sameAs: [contact.instagramUrl],
     areaServed: "Australia",
     knowsAbout: ["Fotografía deportiva", "Video comercial", "Surf", "Real estate", "Gastronomía"],
   };
@@ -29,10 +29,10 @@ function StructuredData() {
 }
 
 export default async function Home() {
-  const { projects } = await getSiteContent();
+  const { projects, contact } = await getSiteContent();
   return (
     <>
-      <StructuredData />
+      <StructuredData contact={contact} />
       <Nav />
       <main>
         <Hero />

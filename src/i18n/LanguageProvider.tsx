@@ -15,12 +15,15 @@ import {
   type Dict,
   type Lang,
 } from "./dictionaries";
+import { site } from "@/content/site";
+import type { SiteContact } from "@/content/source";
 
 interface LanguageContextValue {
   lang: Lang;
   setLang: (lang: Lang) => void;
   toggle: () => void;
   t: Dict;
+  contact: SiteContact;
 }
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
@@ -34,9 +37,11 @@ const STORAGE_KEY = "sf-lang";
 export function LanguageProvider({
   children,
   dictionaries = staticDictionaries,
+  contact = site.contact,
 }: {
   children: ReactNode;
   dictionaries?: Record<Lang, Dict>;
+  contact?: SiteContact;
 }) {
   const [lang, setLangState] = useState<Lang>(DEFAULT_LANG);
 
@@ -65,8 +70,8 @@ export function LanguageProvider({
   }, []);
 
   const value = useMemo<LanguageContextValue>(
-    () => ({ lang, setLang, toggle, t: dictionaries[lang] }),
-    [lang, setLang, toggle, dictionaries]
+    () => ({ lang, setLang, toggle, t: dictionaries[lang], contact }),
+    [lang, setLang, toggle, dictionaries, contact]
   );
 
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;

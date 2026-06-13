@@ -68,11 +68,11 @@ export const viewport: Viewport = {
 export default async function FrontendLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const { dictionaries } = await getSiteContent();
+  const { dictionaries, contact } = await getSiteContent();
   return (
     <html lang="es" className={`${montserrat.variable} ${poppins.variable}`}>
       <body>
-        <LanguageProvider dictionaries={dictionaries}>
+        <LanguageProvider dictionaries={dictionaries} contact={contact}>
           <SmoothScroll>
             <Intro />
             <Grain />
