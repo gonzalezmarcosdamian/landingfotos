@@ -66,6 +66,14 @@ export const SiteSettings: GlobalConfig = {
             { name: "footerBlurb", type: "textarea", localized: true, label: "Texto" },
             { name: "footerTagline", type: "text", localized: true, label: "Tagline" },
             { name: "contactEmail", type: "email", label: "Email de contacto" },
+            {
+              name: "whatsapp",
+              type: "text",
+              label: "WhatsApp (celular)",
+              admin: {
+                description: "Número con código de país. Ej: +61 4XX XXX XXX — el enlace de WhatsApp se arma solo.",
+              },
+            },
             { name: "instagram", type: "text", label: "Instagram (@usuario)" },
             { name: "instagramUrl", type: "text", label: "URL de Instagram" },
           ],
